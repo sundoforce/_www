@@ -237,7 +237,10 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
 			?>
 		</div>
-        <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
+        <textarea id="markdownText" class="preview" style="display:none;">
+            <?php echo get_view_thumbnail($view['content']); ?>
+            <?php echo na_content($view['rich_content']); ?>
+        </textarea>
         <!-- } 본문 내용 끝 -->
 		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
 			<div id="bo_v_btn_group">
