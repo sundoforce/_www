@@ -98,27 +98,21 @@ echo '<div id="faq_thtml">'.conv_content($fm['fm_mobile_tail_html'], 1).'</div>'
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 <script>
-jQuery(function() {
+$(function() {
     $(".closer_btn").on("click", function() {
-        $(this).closest(".con_inner").slideToggle('slow', function() {
-			var $h3 = $(this).closest("li").find("h3");
-
-			$("#faq_con li h3").removeClass("faq_li_open");
-			if($(this).is(":visible")) {
-				$h3.addClass("faq_li_open");
-			}
-		});
+        $(this).closest(".con_inner").slideToggle();
     });
 });
 
 function faq_open(el)
 {	
-    var $con = $(el).closest("li").find(".con_inner"),
-		$h3 = $(el).closest("li").find("h3");
+	$("h3").on("click", function() {
+        $(this).addClass("faq_li_open");
+    });
+    var $con = $(el).closest("li").find(".con_inner");
 
     if($con.is(":visible")) {
         $con.slideUp();
-		$h3.removeClass("faq_li_open");
     } else {
         $("#faq_con .con_inner:visible").css("display", "none");
 
@@ -126,9 +120,6 @@ function faq_open(el)
             function() {
                 // 이미지 리사이즈
                 $con.viewimageresize2();
-				$("#faq_con li h3").removeClass("faq_li_open");
-
-				$h3.addClass("faq_li_open");
             }
         );
     }

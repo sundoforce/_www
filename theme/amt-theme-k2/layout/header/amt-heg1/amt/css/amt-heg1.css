@@ -1,0 +1,14 @@
+@charset 'utf-8';
+
+.amt-heg1 .nt-container {
+	background: none !important;
+	text-align: center;
+}
+
+.amt-heg1 .header-logo {
+	padding: 10px 0;
+}
+
+.amt-heg1 .header-logo img {
+	max-width: 140px
+}

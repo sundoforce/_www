@@ -21,7 +21,28 @@ $view_subject = get_text($view['wr_subject']);
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
+<!--클립보드 JS 및 스타일 설정 시작-->
+<script src="<?php echo G5_JS_URL; ?>/clipboard.min.js"></script>
+<script>
+var clipboard = new ClipboardJS('.btn-clipboard-subject', {
+        text: function() {
+            return '<?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?>';
+        }
+    });
 
+    clipboard.on('success', function(e) {
+        console.log(e);
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+    });
+</script>
+<style>
+button.btn-clipboard-subject {display:inline-block;margin:0;padding:5px 7px;line-height:12px;border:0px solid #ccc;background:#FFFFFF;color:#555;text-decoration:none}
+button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#000}
+</style>
+<!--클립보드 JS 및 스타일 설정 끝-->
 <!-- 게시물 읽기 시작 { -->
 
 <article id="bo_v">
@@ -36,6 +57,14 @@ $view_subject = get_text($view['wr_subject']);
             <?php echo $view_subject; // 글제목 출력 ?>
         </h2>
     </header>
+    <?php if(G5_IS_MOBILE) {?>
+    <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
+    <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
+    <?php } ?>
+    <?php if(!G5_IS_MOBILE) {?>
+    <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
+    <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="click focus" data-placement="right" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
+    <?php } ?>
     <section id="bo_v_info">
         <h3 class="sound_only">페이지 정보</h3>
 		<div class="profile-info f-small">

@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 </div>
 
 
-<?php echo poll('theme/basic'); // 설문조사 ?>
+<?php //echo poll('theme/basic'); // 설문조사 ?>
 <?php echo visit('theme/basic'); // 방문자수 ?>
 
 

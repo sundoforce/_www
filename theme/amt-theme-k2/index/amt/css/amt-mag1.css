@@ -1,0 +1,55 @@
+/* 컬럼간 간격조정 */
+.row.no-gutters{margin-right:0;margin-left:0}.row.no-gutters>[class*=" col-"],.row.no-gutters>[class^=col-]{padding-right:0;padding-left:0}.row.fix-gutters-25{margin-right:-2.5px;margin-left:-2.5px}.row.fix-gutters-25>[class*=" col-"],.row.fix-gutters-25>[class^=col-]{padding-right:2.5px;padding-left:2.5px}.row.fix-gutters-5{margin-right:-5px;margin-left:-5px}.row.fix-gutters-5>[class*=" col-"],.row.fix-gutters-5>[class^=col-]{padding-right:5px;padding-left:5px}.row.fix-gutters-10{margin-right:-10px;margin-left:-10px}.row.fix-gutters-10>[class*=" col-"],.row.fix-gutters-10>[class^=col-]{padding-right:10px;padding-left:10px}.row.fix-gutters-15{margin-right:-15px;margin-left:-15px}.row.fix-gutters-15>[class*=" col-"],.row.fix-gutters-15>[class^=col-]{padding-right:15px;padding-left:15px}.row.fix-gutters-20{margin-right:-20px;margin-left:-20px}.row.fix-gutters-20>[class*=" col-"],.row.fix-gutters-20>[class^=col-]{padding-right:20px;padding-left:20px}.row.fix-gutters-30{margin-right:-30px;margin-left:-30px}.row.fix-gutters-30>[class*=" col-"],.row.fix-gutters-30>[class^=col-]{padding-right:30px;padding-left:30px}
+
+.nt-main.amt-mag1 .amt-widgwrap {
+	border: 1px solid #dfdfdf;
+}
+
+.nt-main.amt-mag1 .amt-widg-tit {
+	padding: 5px 10px;
+	border-bottom: 1px solid #dfdfdf;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.nt-main.amt-mag1 .amt-widg-tit:hover{
+	background: #2a3a67;
+	color: #fff;
+}
+
+.nt-main.amt-mag1 .amt-widg-cust .basic-wr-gallery li {
+	padding-bottom: 0 !important;
+}
+
+.nt-main.amt-mag1 .amt-widg-tit:hover a {
+	color: #fff;
+}
+
+.nt-main.amt-mag1 .amt-widg-tit h3 a {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.nt-main.amt-mag1 .amt-widg-con {
+	padding: 10px;
+}
+
+.nt-main.amt-mag1 .amt-widg-con .ellipsis a:hover {
+	color: #2a3a67;
+}
+
+.nt-main.amt-mag1 .amt-widg-con .ellipsis .count {
+	color: #2a3a67 !important;
+}
+
+.nt-main.amt-mag1 h3.h3 .more {
+	font-size: 15px;
+}
+
+

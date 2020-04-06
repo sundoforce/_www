@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+/* Common */
+body{font-size: 0.75em;}
+a:hover {text-decoration:none}
+.h20{height:20px}
+.text-female{color:#EA526F}
+.text-big-rotate{font-size: 30px; position: absolute; top: 50%;}
+.pull-left{float:left}
+
+/* Table  */
+.dataTable .sorting:nth-child(2), .dataTable .sorting:nth-child(4),.dataTable .sorting:nth-child(8){width: 55px!important;}
+.dataTable .sorting:nth-child(3){width: 100px!important;}
+.dataTable .sorting:nth-child(5), .dataTable .sorting:nth-child(6){width: 35px!important;}
+.dataTable .sorting:nth-child(7){width: 75px!important;}
+.btnGender, .btnAge{cursor:pointer; text-align: center;}
+.submit_date {cursor:pointer}
+
+/* Soso  */
+#wrapper{display:block}
+#container{background: #f8f9fc;}
+.pageGoogle{padding: 0 20px}
+.scroll_top{display:none}
+.submit_date{font-size: 14px; font-weight: 400; line-height: 1; color: #555; text-align: center; background-color: #eee; border: 1px solid #ccc; border-radius: 2px;  width: auto; min-width: 45px; padding: 4px; border-width: 1px;}
+.gender_today, .gender_yesterday, .gender_week{cursor:pointer}
+.btnGaLink a{ font-size: 18px;color:#4e73df}
+.input-daterange .input-group-addon{font-size: 14px; font-weight: 400; line-height: 1; color: #555; text-align: center; background-color: #eee; border: 1px solid #ccc; border-radius: 4px; width: auto; min-width: 40px; padding: 4px 5px; border-width: 1px 0; margin-left: -5px; margin-right: -5px;}
+.input-daterange .input-sm{ height:25px}
+.loading i {font-size:15px;margin-left:5px}
+.scroll_top{display:none}

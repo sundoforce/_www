@@ -209,3 +209,8 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
    
     <div id="container">
         <?php if (!defined("_INDEX_")) { ?><h2 id="container_title"><span title="<?php echo get_text($g5['title']); ?>"><?php echo get_head_title($g5['title']); ?></span></h2><?php } ?>
+        <ins class="kakao_ad_area" style="display:none;"
+                     data-ad-unit    = "DAN-uv8mowyi4c4i"
+                     data-ad-width   = "728"
+                     data-ad-height  = "90"></ins>
+            <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>

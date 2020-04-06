@@ -260,6 +260,16 @@ if( $config['cf_cert_use'] || (defined('G5_YOUNGCART_VER') && G5_YOUNGCART_VER) 
 
 define('G5_HTTP_BBS_URL',  https_url(G5_BBS_DIR, false));
 define('G5_HTTPS_BBS_URL', https_url(G5_BBS_DIR, true));
+
+/*cf_deitor 변경*/
+
+//if($bo_table == "score"){
+  //$config['cf_editor'] = "editor.md";
+//}
+//if($bo_table == "sheet"){
+  //  $config['cf_editor'] = "vditor3";
+//}
+
 if ($config['cf_editor'])
     define('G5_EDITOR_LIB', G5_EDITOR_PATH."/{$config['cf_editor']}/editor.lib.php");
 else
@@ -525,6 +535,12 @@ if ($is_admin != 'super') {
 // 테마경로
 if(defined('_THEME_PREVIEW_') && _THEME_PREVIEW_ === true)
     $config['cf_theme'] = trim($_GET['theme']);
+
+if (!is_mobile()) {
+//    $config['cf_theme'] = "Nariya-Basic"; // PC 테마
+} else {
+  //  $config['cf_theme'] = "grape"; // 모바일 테마
+}
 
 if(isset($config['cf_theme']) && trim($config['cf_theme'])) {
     $theme_path = G5_PATH.'/'.G5_THEME_DIR.'/'.$config['cf_theme'];

@@ -72,7 +72,28 @@ while ($row = sql_fetch_array($result))
                 $wr_nogood = $row2['wr_nogood'];
             }
 
-            $sql = " insert into $move_write_table
+			// 게시판 플러그인
+			$sql_bbs = '';
+			if(IS_NA_BBS) {
+				// as_thumb은 이전 안함
+				$sql_bbs .= " as_extend = '{$row2['as_extend']}',
+							  as_down = '{$row2['as_down']}',
+							  as_view = '{$row2['as_view']}',
+							  as_star_score = '{$row2['as_star_score']}',
+							  as_star_cnt = '{$row2['as_star_cnt']}',
+							  as_choice = '{$row2['as_choice']}',
+							  as_choice_cnt = '{$row2['as_choice_cnt']}',
+						    ";
+
+				// 타입과 태그는 이동시에만 처리
+				if ($sw == 'move') {
+					$sql_bbs .= " as_type = '{$row2['as_type']}', 
+								  as_tag = '".addslashes($row2['as_tag'])."', 
+								";
+				}
+			}
+
+			$sql = " insert into $move_write_table
                         set wr_num = '$next_wr_num',
                              wr_reply = '{$row2['wr_reply']}',
                              wr_is_comment = '{$row2['wr_is_comment']}',
@@ -98,6 +119,7 @@ while ($row = sql_fetch_array($result))
                              wr_file = '{$row2['wr_file']}',
                              wr_last = '{$row2['wr_last']}',
                              wr_ip = '{$row2['wr_ip']}',
+							 $sql_bbs
                              wr_1 = '".addslashes($row2['wr_1'])."',
                              wr_2 = '".addslashes($row2['wr_2'])."',
                              wr_3 = '".addslashes($row2['wr_3'])."',
@@ -169,6 +191,14 @@ while ($row = sql_fetch_array($result))
 
                     // 추천데이터 이동
                     sql_query(" update {$g5['board_good_table']} set bo_table = '$move_bo_table', wr_id = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
+
+					if(IS_NA_BBS) {
+						// 태그로그 이동
+				        sql_query(" update {$g5['na_tag_log']} set bo_table = '$move_bo_table', wr_id = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
+
+						// 신고로그이동
+				        sql_query(" update {$g5['na_shingo']} set bo_table = '$move_bo_table', wr_id = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
+					}
                 }
             }
             else
@@ -179,7 +209,12 @@ while ($row = sql_fetch_array($result))
                 {
                     // 최신글 이동
                     sql_query(" update {$g5['board_new_table']} set bo_table = '$move_bo_table', wr_id = '$insert_id', wr_parent = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
-                }
+
+					if(IS_NA_BBS) {
+						// 신고로그 이동
+				        sql_query(" update {$g5['na_shingo']} set bo_table = '$move_bo_table', wr_id = '$insert_id', wr_parent = '$save_parent' where bo_table = '$bo_table' and wr_id = '{$row2['wr_id']}' ");
+					}
+				}
             }
 
             sql_query(" update $move_write_table set wr_parent = '$save_parent' where wr_id = '$insert_id' ");

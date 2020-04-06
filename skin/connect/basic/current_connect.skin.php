@@ -3,6 +3,8 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$connect_skin_url.'/style.css">', 0);
+include_once(G5_PLUGIN_PATH.'/GeoIP/geoip.php');
+$gi = geoip_open(G5_PLUGIN_PATH.'/GeoIP/geoip.dat',GEOIP_STANDARD);
 ?>
 
 <!-- 현재접속자 목록 시작 { -->
@@ -19,6 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$connect_skin_url.'/style.css">',
     ?>
         <li>
             <span class="crt_num"><?php echo $list[$i]['num'] ?></span>
+            <span class="crt_num"><img src="<?php echo G5_PLUGIN_URL;?>/GeoIP/<?php echo geoip_country_code_by_addr($gi, $list[$i]['lo_ip']);?>.png" width="18" height="12" title="<?php echo geoip_country_name_by_addr($gi, $list[$i]['lo_ip'])?>" style='vertical-align:middle; padding-bottom:1px;'> <?php echo $list[$i]['name']; ?></span>
             <span class="crt_profile"><?php echo get_member_profile_img($list[$i]['mb_id']); ?></span>
             <div class="crt_info">
             	<span class="crt_name"><?php echo $list[$i]['name'] ?></span>

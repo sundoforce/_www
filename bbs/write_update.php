@@ -144,7 +144,8 @@ if ($w == '' || $w == 'u') {
     // 김선용 1.00 : 글쓰기 권한과 수정은 별도로 처리되어야 함
     if($w =='u' && $member['mb_id'] && $wr['mb_id'] === $member['mb_id']) {
         ;
-    } else if ($member['mb_level'] < $board['bo_write_level']) {
+    // } else if ($member['mb_level'] < $board['bo_write_level']) {
+    } else if (!$is_admin && ($member['mb_level'] < $board['bo_write_level'])) {
         alert('글을 쓸 권한이 없습니다.');
     }
 

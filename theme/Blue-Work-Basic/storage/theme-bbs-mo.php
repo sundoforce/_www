@@ -1,0 +1,30 @@
+<?php
+if (!defined('_GNUBOARD_')) exit;
+$data=array (
+  'seo' => '1',
+  'seo_desc' => '음악포털 플랫폼',
+  'seo_keys' => '뮤지아,muzia,작곡,편곡,시벨리우스,sibelius,finale,피날레,사보,채보,sore,악보',
+  'seo_img' => '../storage/image/seo-muzia.jpg',
+  'logo_img' => '../storage/image/logo-logo-logo.png',
+  'logo_text' => '뮤지아',
+  'logo_color' => 'white',
+  'stats' => '',
+  'index' => 'work-basic',
+  'title' => 'title-basic',
+  'page_img' => '',
+  'page' => '',
+  'page_side' => 'work-basic',
+  'top' => '',
+  'lnb' => 'work-basic',
+  'header' => '',
+  'menu' => 'amt-meg1',
+  'wing' => 'none',
+  'footer' => 'work-basic',
+  'sidebar' => 'sidebar-muzia',
+  'layout' => '',
+  'style' => '',
+  'size' => '',
+  'background' => '',
+  'bg' => '',
+);
+?>

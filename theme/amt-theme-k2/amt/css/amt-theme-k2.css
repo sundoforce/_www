@@ -1,0 +1,10 @@
+@charset 'utf-8';
+
+.boxed.wrapper {
+	border-left: 1px solid #dfdfdf;
+	border-right: 1px solid #dfdfdf;
+}
+
+.boxed.wrapper #nt_body .nt-container {
+	padding: 0 30px;
+}

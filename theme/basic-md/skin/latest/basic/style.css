@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /* 새글 스킨 (latest) */
-.lat {position:relative;margin-bottom:20px;background:#fff}
+.lat {position:relative;margin-bottom:20px;overflow:hidden;background:#fff}
 .lat .lat_title {display:block;line-height:45px;font-size:1.2em;color:#253dbe}
 .lat .lat_title a {position:relative;color:#000;display:inline-block}
 
@@ -16,8 +16,6 @@
 .lat li .fa-caret-right {color:#bbb}
 .lat li .fa-download {display:inline-block;width:16px;line-height:16px;font-size:0.833em;color:#daae37;background:#ffefb9;text-align:center;border-radius:2px;vertical-align:middle}
 .lat li .fa-link {display:inline-block;width:16px;line-height:16px;font-size:0.833em;color:#b451fd;background:#edd3fd;text-align:center;border-radius:2px;vertical-align:middle}
-
-.lat .profile_img img{border-radius:50%}
 
 .lt_info {padding:10px 0}
 .lt_info .lt_nick {}

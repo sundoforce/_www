@@ -49,6 +49,10 @@ if ($sca || $stx || $stx === '0') {     //검색이면
 
     $sql_search .= " and (wr_num between {$spt} and ({$spt} + {$config['cf_search_part']})) ";
 
+	// 나리야
+	if($na_sql_where) 
+		$sql_search .= $na_sql_where;
+
     // 원글만 얻는다. (코멘트의 내용도 검색하기 위함)
     // 라엘님 제안 코드로 대체 http://sir.kr/g5_bug/2922
     $sql = " SELECT COUNT(DISTINCT `wr_parent`) AS `cnt` FROM {$write_table} WHERE {$sql_search} ";
@@ -168,13 +172,13 @@ if(!$sst)
     $sst  = "wr_num, wr_reply";
 
 if ($sst) {
-    $sql_order = " order by {$sst} {$sod} ";
+    $sql_order = " order by {$na_sql_orderby} {$sst} {$sod} ";
 }
 
 if ($is_search_bbs) {
     $sql = " select distinct wr_parent from {$write_table} where {$sql_search} {$sql_order} limit {$from_record}, $page_rows ";
 } else {
-    $sql = " select * from {$write_table} where wr_is_comment = 0 ";
+    $sql = " select * from {$write_table} where wr_is_comment = 0 {$na_sql_where} ";
     if(!empty($notice_array))
         $sql .= " and wr_id not in (".implode(', ', $notice_array).") ";
     $sql .= " {$sql_order} limit {$from_record}, $page_rows ";

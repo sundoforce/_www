@@ -1,0 +1,140 @@
+<?php
+if (!defined('_GNUBOARD_')) exit;
+$data=array (
+  0 => 
+  array (
+    'text' => '사이트소개',
+    'href' => '',
+    'icon' => 'empty',
+    'target' => '_self',
+    'line' => '',
+    'sp' => '',
+    'limit' => '',
+    'grade' => 0,
+    'id' => 'link',
+    's' => 
+    array (
+      0 => 
+      array (
+        'text' => '소개1',
+        'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=intro1',
+        'icon' => 'empty',
+        'target' => '_self',
+        'line' => '',
+        'sp' => '',
+        'limit' => '',
+        'grade' => 0,
+        'id' => 'bbs-board-intro1',
+        'bo_table' => 'intro1',
+        'wr_id' => NULL,
+        'sca' => NULL,
+      ),
+      1 => 
+      array (
+        'text' => '소개2',
+        'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=intro2',
+        'icon' => 'empty',
+        'target' => '_self',
+        'line' => '',
+        'sp' => '',
+        'limit' => '',
+        'grade' => 0,
+        'id' => 'bbs-board-intro2',
+        'bo_table' => 'intro2',
+        'wr_id' => NULL,
+        'sca' => NULL,
+      ),
+    ),
+  ),
+  1 => 
+  array (
+    'text' => '서비스종류',
+    'href' => '',
+    'icon' => 'empty',
+    'target' => '_self',
+    'line' => '',
+    'sp' => '',
+    'limit' => '',
+    'grade' => 0,
+    'id' => 'link',
+    's' => 
+    array (
+      0 => 
+      array (
+        'text' => '서비스1',
+        'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=ser1',
+        'icon' => 'empty',
+        'target' => '_self',
+        'line' => '',
+        'sp' => '',
+        'limit' => '',
+        'grade' => 0,
+        'id' => 'bbs-board-ser1',
+        'bo_table' => 'ser1',
+        'wr_id' => NULL,
+        'sca' => NULL,
+      ),
+      1 => 
+      array (
+        'text' => '서비스2',
+        'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=ser2',
+        'icon' => 'empty',
+        'target' => '_self',
+        'line' => '',
+        'sp' => '',
+        'limit' => '',
+        'grade' => 0,
+        'id' => 'bbs-board-ser2',
+        'bo_table' => 'ser2',
+        'wr_id' => NULL,
+        'sca' => NULL,
+      ),
+    ),
+  ),
+  2 => 
+  array (
+    'text' => '커뮤니티',
+    'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=commu',
+    'icon' => 'empty',
+    'target' => '_self',
+    'line' => '',
+    'sp' => '',
+    'limit' => '',
+    'grade' => 0,
+    'id' => 'bbs-board-commu',
+    'bo_table' => 'commu',
+    'wr_id' => NULL,
+    'sca' => NULL,
+  ),
+  3 => 
+  array (
+    'text' => '이벤트',
+    'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=eventboard',
+    'icon' => 'empty',
+    'target' => '_self',
+    'line' => '',
+    'sp' => '',
+    'limit' => '',
+    'grade' => 0,
+    'id' => 'bbs-board-eventboard',
+    'bo_table' => 'eventboard',
+    'wr_id' => NULL,
+    'sca' => NULL,
+  ),
+  4 => 
+  array (
+    'text' => 'FAQ',
+    'href' => 'http://rtfactory.iwinv.net/kang/nariya/bbs/board.php?bo_table=qa',
+    'icon' => 'empty',
+    'target' => '_self',
+    'line' => '',
+    'sp' => '',
+    'limit' => '',
+    'grade' => 0,
+    'id' => 'bbs-board-qa',
+    'bo_table' => 'qa',
+    'wr_id' => NULL,
+    'sca' => NULL,
+  ),
+);
+?>

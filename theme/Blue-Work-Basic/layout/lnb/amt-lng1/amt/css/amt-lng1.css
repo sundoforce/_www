@@ -1,0 +1,44 @@
+@charset 'utf-8';
+
+.amt-lng1 {
+	background: #2a3a67;
+}
+
+.amt-lng1 ul {
+	padding: 0 !important;
+}
+
+.amt-lng1 ul > li {
+	padding: 0 !important;
+}
+
+.amt-lng1 ul > li > a {
+	line-height: 40px;
+	font-size: 13px;
+	color: #fff;
+	padding: 0 15px;
+}
+
+.amt-lng1 ul > li > a:hover {
+	background: #fff;
+	color: #2a3a67;
+	font-weight: 600;
+}
+
+.amt-lng1 ul > li .sv_wrap a {
+	line-height: 40px;
+	font-size: 13px;
+	color: #fff;
+	padding: 0 15px;
+	display: inline-block;
+}
+
+.amt-lng1 ul > li .sv_wrap a:hover {
+	background: #fff;
+	color: #2a3a67;
+	font-weight: 600;
+}
+
+.amt-lng1 ul > li::after {
+	display: none;
+}

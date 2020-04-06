@@ -38,7 +38,8 @@ if ($w == '') {
         alert('글쓰기에는 \$wr_id 값을 사용하지 않습니다.', G5_BBS_URL.'/board.php?bo_table='.$bo_table);
     }
 
-    if ($member['mb_level'] < $board['bo_write_level']) {
+    // if ($member['mb_level'] < $board['bo_write_level'])
+    if (!$is_admin && ($member['mb_level'] < $board['bo_write_level'])){
         if ($member['mb_id']) {
             alert('글을 쓸 권한이 없습니다.');
         } else {
@@ -410,7 +411,6 @@ if ($config['cf_editor'] && $is_dhtml_editor_use && $board['bo_use_dhtml_editor'
         // kisa 취약점 제보 xss 필터 적용
         $content = get_text(html_purifier($write['wr_content']), 0);
     }
-
     if(is_file(G5_EDITOR_PATH.'/'.$config['cf_editor'].'/autosave.editor.js'))
         $editor_content_js = '<script src="'.G5_EDITOR_URL.'/'.$config['cf_editor'].'/autosave.editor.js"></script>'.PHP_EOL;
 }

@@ -73,6 +73,7 @@ define('G5_THEME_DIR',      'theme');
 define('G5_GROUP_DIR',      'group');
 define('G5_CONTENT_DIR',    'content');
 
+
 // URL 은 브라우저상에서의 경로 (도메인으로 부터의)
 if (G5_DOMAIN) {
     define('G5_URL', G5_DOMAIN);
@@ -124,6 +125,12 @@ define('G5_LGXPAY_PATH',    G5_PLUGIN_PATH.'/'.G5_LGXPAY_DIR);
 define('G5_SNS_PATH',       G5_PLUGIN_PATH.'/'.G5_SNS_DIR);
 define('G5_SYNDI_PATH',     G5_PLUGIN_PATH.'/'.G5_SYNDI_DIR);
 define('G5_PHPMAILER_PATH', G5_PLUGIN_PATH.'/'.G5_PHPMAILER_DIR);
+
+// 출석부
+define('G5_ATTENDANCE_DIR', 'attendance');
+define('G5_ATTENDANCE_URL', G5_PLUGIN_URL.'/'.G5_ATTENDANCE_DIR);
+define('G5_ATTENDANCE_PATH',G5_PLUGIN_PATH.'/'.G5_ATTENDANCE_DIR);
+
 //==============================================================================
 
 

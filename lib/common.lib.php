@@ -1326,14 +1326,18 @@ function get_sideview($mb_id, $name='', $email='', $homepage='')
         } else {
             $tmp_name = $tmp_name.' '.$name;
         }
+
+        include_once(G5_PLUGIN_PATH.'/GeoIP/geoip.php');
+        $gi = geoip_open(G5_PLUGIN_PATH.'/GeoIP/geoip.dat',GEOIP_STANDARD);
+
         $tmp_name .= '</a>';
+        $mb_ip =  sql_fetch("select mb_ip from {$g5['member_table']} where mb_id='$mb_id'");
+        $tmp_name .= '<img src="'.G5_PLUGIN_URL.'/GeoIP/'.geoip_country_code_by_addr($gi, $mb_ip['mb_ip']).'.png">';
 
         $title_mb_id = '['.$mb_id.']';
     } else {
         if(!$bo_table)
             return $name;
-
-        $tmp_name = '<a href="'.get_pretty_url($bo_table, '', 'sca='.$sca.'&amp;sfl=wr_name,1&amp;stx='.$name).'" title="'.$name.' 이름으로 검색" class="sv_guest" rel="nofollow" onclick="return false;">'.$name.'</a>';
         $title_mb_id = '[비회원]';
     }
 

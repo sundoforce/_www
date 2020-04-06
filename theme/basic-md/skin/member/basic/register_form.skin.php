@@ -53,7 +53,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 	    <div class="tbl_frm01 tbl_wrap register_form_inner">
 	        <h2>개인정보 입력</h2>
 	        <ul>
-	            <li>
+	            <li class="half_input left_input margin_input">
 	                <label for="reg_mb_name">이름<strong class="sound_only">필수</strong></label>
 	                <input type="text" id="reg_mb_name" name="mb_name" value="<?php echo get_text($member['mb_name']) ?>" <?php echo $required ?> <?php echo $readonly; ?> class="frm_input full_input <?php echo $required ?> <?php echo $readonly ?>" size="10" placeholder="이름">
 	                <?php
@@ -84,7 +84,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 	                <?php } ?>
 	            </li>
 	            <?php if ($req_nick) {  ?>
-	            <li>
+	            <li class="half_input left_input">
 	                <label for="reg_mb_nick">
 	                	닉네임<strong class="sound_only">필수</strong>
 	                	<button type="button" class="tooltip_icon"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span class="sound_only">설명보기</span></button>
@@ -98,16 +98,15 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 	            <?php }  ?>
 	
 	            <li>
-	                <label for="reg_mb_email">E-mail<strong class="sound_only">필수</strong>
+	                <label for="reg_mb_email">E-mail<strong class="sound_only">필수</strong></label>
 	                
 	                <?php if ($config['cf_use_email_certify']) {  ?>
 	                <button type="button" class="tooltip_icon"><i class="fa fa-question-circle-o" aria-hidden="true"></i><span class="sound_only">설명보기</span></button>
-					<span class="tooltip">
+					<span class="tooltip">이미지 크기는 가
 	                    <?php if ($w=='') { echo "E-mail 로 발송된 내용을 확인한 후 인증하셔야 회원가입이 완료됩니다."; }  ?>
 	                    <?php if ($w=='u') { echo "E-mail 주소를 변경하시면 다시 인증하셔야 합니다."; }  ?>
 	                </span>
-	                <?php } ?>
-					</label>
+	                <?php }  ?>
 	                <input type="hidden" name="old_email" value="<?php echo $member['mb_email'] ?>">
 	                <input type="text" name="mb_email" value="<?php echo isset($member['mb_email'])?$member['mb_email']:''; ?>" id="reg_mb_email" required class="frm_input email full_input required" size="70" maxlength="100" placeholder="E-mail">
 	            
@@ -120,14 +119,14 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
 	            </li>
 	            <?php }  ?>
 	
-	            <li>
+	            <li class="half_input left_input margin_input">
 	            <?php if ($config['cf_use_tel']) {  ?>
 	            
 	                <label for="reg_mb_tel">전화번호<?php if ($config['cf_req_tel']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
 	                <input type="text" name="mb_tel" value="<?php echo get_text($member['mb_tel']) ?>" id="reg_mb_tel" <?php echo $config['cf_req_tel']?"required":""; ?> class="frm_input full_input <?php echo $config['cf_req_tel']?"required":""; ?>" maxlength="20" placeholder="전화번호">
 	            <?php }  ?>
 				</li>
-				<li>
+				<li class="half_input left_input">
 	            <?php if ($config['cf_use_hp'] || $config['cf_cert_hp']) {  ?>
 	                <label for="reg_mb_hp">휴대폰번호<?php if ($config['cf_req_hp']) { ?><strong class="sound_only">필수</strong><?php } ?></label>
 	                
@@ -469,11 +468,11 @@ function fregisterform_submit(f)
     return true;
 }
 
-jQuery(function($){
+$(function(){
 	//tooltip
-    $(document).on("click", ".tooltip_icon", function(e){
-        $(this).next(".tooltip").fadeIn(400).css("display","inline-block");
-    }).on("mouseout", ".tooltip_icon", function(e){
+    $(".tooltip_icon").click(function(){
+        $(this).next(".tooltip").fadeIn(400);
+    }).mouseout(function(){
         $(this).next(".tooltip").fadeOut();
     });
 });

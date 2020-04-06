@@ -1,0 +1,194 @@
+@charset "utf-8";
+
+.widget-amina-outlogin {
+    width: 100%;
+    margin: 0px;
+    padding: 10px;
+    border:1px solid #ddd;
+    background:#fff;
+}
+
+.widget-amina-outlogin .login-box {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.widget-amina-outlogin .login-cell {
+    display: table-cell;
+    padding: 0px;
+    vertical-align: middle;
+}
+
+.widget-amina-outlogin .login-cell.login-btn {
+    color: #373E4A;
+    width: 80px;
+    height: 100%;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-left: 0px;
+    cursor: pointer;
+    letter-spacing: -1px;
+}
+
+.widget-amina-outlogin .login-cell .input-group-addon i {
+    width: 15px;
+}
+
+.widget-amina-outlogin .login-cell .form-control {
+    border-color: #ddd !important;
+    box-shadow: none !important;
+}
+
+.widget-amina-outlogin .login-cell .form-control:focus {
+    border-color: #ddd !important;
+    box-shadow: none !important;
+}
+
+.widget-amina-outlogin .login-cell .no-top-border {
+    border-top: 0px !important
+}
+
+.widget-amina-outlogin .login-misc {
+    letter-spacing: -1px;
+    color: #888;
+    font-size: 11px;
+    margin-top:10px;
+}
+
+.widget-amina-outlogin .login-misc label {
+    line-height: 12px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.widget-amina-outlogin .profile .photo {
+    margin-right: 10px;
+}
+
+.widget-amina-outlogin .profile .photo img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+}
+
+.widget-amina-outlogin .profile .photo i {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+    line-height: 44px;
+    text-align: center;
+    background: #fff;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.widget-amina-outlogin .bar {
+    color: #ccc;
+    margin: 0px 4px;
+}
+
+.widget-amina-outlogin .exp-bar {
+    margin: 8px 0px;
+}
+
+.widget-amina-outlogin .exp-bar .progress {
+    margin: 0px !important;
+    height: 8px !important;
+}
+
+.widget-amina-outlogin .logout-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    text-align: center;
+    margin-top: -2px;
+    width: 60px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: -1px;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    margin: 0px !important;
+}
+
+.input-group {
+    width: 100% !important;
+}
+
+/* buttom css */
+
+.btn-custom {     
+    display: inline-block;
+    padding: 18px 16px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    background: #fff;
+    border: 1px solid transparent;
+    border-radius: 0px; 
+}
+
+.btn-login-custom {     
+    display: inline-block;
+    padding: 10px 0px;
+    margin-bottom: 0;
+    color:#fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    background: #6d94ce;
+    border: 1px solid transparent;
+    border-radius: 0px; 
+}
+
+.btn-login-custom:hover {     
+    display: inline-block;
+    padding: 10px 0px;
+    margin-bottom: 0;
+    color:#fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    background: #6988b5;
+    border: 1px solid transparent;
+    border-radius: 0px; 
+}
+
+/* progress custom */
+.progress { height:12px; border-radius: 0px; }
+
+/* sns custom */
+.login-sns { margin:10px 0px 0px 0px !important; }
