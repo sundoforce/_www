@@ -3,12 +3,9 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css" media="screen">', 0);
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
-include_once(G5_LIB_PATH.'/thumbnail.lib.php');
-include_once(G5_EDITOR_LIB);
-$view['content'] = editormd_view($view['wr_content'],"bo_v_con");
-// add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.G5_EDITOR_URL.'/vditor3/dist/index.css">', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/dist/index.min.js"></script>', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/editorOptions.js"></script>', 0);
 
 // Clip Modal
 na_script('clip');
@@ -20,7 +17,7 @@ $bo_color = ($boset['color']) ? $boset['color'] : 'navy';
 if ($is_member)
 	na_script('autosave');
 
-if($is_dhtml_editor) {
+if($is_dhtml_editor) { 
 ?>
 <style>
 	#wr_content { border:0; display:none; }
@@ -154,8 +151,10 @@ if($is_dhtml_editor) {
 					<p id="char_count_desc">이 게시판은 최소 <strong><?php echo $write_min; ?></strong>글자 이상, 최대 <strong><?php echo $write_max; ?></strong>글자 이하까지 글을 쓰실 수 있습니다.</p>
 				</div>
 			<?php } ?>
+
 			<?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
-            <div class="bo_w_opt">
+
+			<div class="bo_w_opt">
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-white" title="이모티콘" onclick="na_clip('emo', '<?php echo $is_dhtml_editor ?>');">
 						<i class="fa fa-smile-o" aria-hidden="true"></i>

@@ -2,20 +2,15 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
-if ($bo_table == "score") {
-include_once(G5_EDITOR_LIB);
-$view['content'] = editormd_view($view['wr_content'],"bo_v_con");
-}
-
-
-
 // SyntaxHighLighter
 if(isset($boset['na_code']) && $boset['na_code'])
 	na_script('code');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
-
+add_stylesheet('<link rel="stylesheet" href="'.G5_EDITOR_URL.'/vditor3/dist/index.css">', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/dist/index.min.js"></script>', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/editorOptions.js"></script>', 0);
 // 컬러
 $bo_color = ($boset['color']) ? $boset['color'] : 'navy';
 
@@ -50,16 +45,6 @@ button.btn-clipboard-subject {display:inline-block;margin:0;padding:5px 7px;line
 button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#000}
 </style>
 <!--클립보드 JS 및 스타일 설정 끝-->
-<script>
-
-Vditor.preview(document.getElementById('bo_v_con'), {
-
-    customEmoji : emojiOptions,
-
-})
-
-</script>
-
 <!-- 게시물 읽기 시작 { -->
 
 <article id="bo_v">
@@ -74,14 +59,14 @@ Vditor.preview(document.getElementById('bo_v_con'), {
             <?php echo $view_subject; // 글제목 출력 ?>
         </h2>
     </header>
-        <?php if(G5_IS_MOBILE) {?>
-            <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-                <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
-            <?php } ?>
-        <?php if(!G5_IS_MOBILE) {?>
-            <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-        <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="click focus" data-placement="right" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
+    <?php if(G5_IS_MOBILE) {?>
+        <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
+            <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
         <?php } ?>
+    <?php if(!G5_IS_MOBILE) {?>
+        <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
+    <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="click focus" data-placement="right" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
+    <?php } ?>
     <section id="bo_v_info">
         <h3 class="sound_only">페이지 정보</h3>
 		<div class="profile-info f-small">
@@ -252,8 +237,8 @@ Vditor.preview(document.getElementById('bo_v_con'), {
 				//echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
 			?>
 		</div>
+        <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
         <!-- } 본문 내용 끝 -->
-
 		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
 			<div id="bo_v_btn_group">
 				<div class="btn-group btn-group-lg" role="group">
@@ -488,6 +473,14 @@ $(function() {
 });
 </script>
 <!-- } 게시글 읽기 끝 -->
+
+    <script>
+        Vditor.preview(document.getElementById('bo_v_con'),
+            document.getElementById('markdownText').textContent, {
+                className: 'preview vditor-reset',
+                customEmoji: emojiOptions,
+            })
+    </script>
 
 <?php if($board['bo_use_sns']) { ?>
 <!-- SNS 공유창 시작 { -->
