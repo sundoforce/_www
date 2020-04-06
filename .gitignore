@@ -16,6 +16,6 @@ naver*.html
 /plugin/GeoIP/
 /plugin/GeoIP/*
 /data/
-/.idea/
-.idea/
+/.idea/*
+.idea/*
 idea/
