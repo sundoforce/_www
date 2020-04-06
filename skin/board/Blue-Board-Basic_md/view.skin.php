@@ -234,7 +234,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 
 				// 글내용 출력
 				echo na_content(get_view_thumbnail($view['content']));
-				//echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
+				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
 			?>
 		</div>
         <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
