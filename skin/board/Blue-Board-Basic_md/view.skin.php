@@ -233,14 +233,15 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				}
 
 				// 글내용 출력
-				echo na_content(get_view_thumbnail($view['content']));
-				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
+// 				echo na_content(get_view_thumbnail($view['content']));
+// 				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
+
 			?>
 		</div>
-        <textarea id="markdownText" class="preview" style="display:none;">
-            <?php echo get_view_thumbnail($view['content']); ?>
-            <?php echo na_content($view['rich_content']); ?>
-        </textarea>
+		        <div id="bo_v_con2" class="f-content">
+
+        <textarea id="markdownText" class="preview" style="display:none;"><?php echo na_content($view['content']); ?></textarea>
+        </div>
         <!-- } 본문 내용 끝 -->
 		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
 			<div id="bo_v_btn_group">
@@ -296,7 +297,6 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 		?>
 
 	</section>
-
     <section id="bo_v_data" class="f-small">
         <h3 class="sound_only">관련자료</h3>
 		<ul>
@@ -478,7 +478,7 @@ $(function() {
 <!-- } 게시글 읽기 끝 -->
 
     <script>
-        Vditor.preview(document.getElementById('bo_v_con'),
+        Vditor.preview(document.getElementById('bo_v_con2'),
             document.getElementById('markdownText').textContent, {
                 className: 'preview vditor-reset',
                 customEmoji: emojiOptions,

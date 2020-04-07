@@ -11,7 +11,8 @@ $data=array (
   'term' => '',
   'dayterm' => '',
   'gr_list' => '',
-  'bo_list' => '',
+  'bo_list' => 'admin,notice',
+  'bo_except' => '1',
   'ca_list' => '',
   'mb_list' => '',
 );

@@ -214,7 +214,7 @@
 #bo_v_con {
 	padding:20px 15px 30px; 
 	width:100%; 
-	min-height:200px; 
+	/*min-height:200px; */
 	word-break:break-all;
 	overflow:hidden
 }

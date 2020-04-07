@@ -139,7 +139,7 @@ $data=array (
     array (
       0 => 
       array (
-        'text' => '팁+질문답변+글',
+        'text' => '토론(포럼)',
         'href' => 'https://muzia.net/qna',
         'icon' => 'fa fa-comments-o',
         'target' => '_self',
