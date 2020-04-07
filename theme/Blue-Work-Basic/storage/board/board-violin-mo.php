@@ -1,9 +1,17 @@
 <?php
 if (!defined('_GNUBOARD_')) exit;
 $data=array (
-  'list_skin' => 'basic',
-  'head_skin' => '',
-  'head_color' => '',
+  'list_skin' => 'gallery',
+  'head_line' => '',
+  'new' => '',
+  'thumb_w' => '',
+  'thumb_h' => '',
+  'thumb_d' => '',
+  'item' => '4',
+  'lg' => '4',
+  'md' => '3',
+  'sm' => '3',
+  'xs' => '2',
   'color' => '',
   'cw' => '7',
   'cwlg' => '6',
