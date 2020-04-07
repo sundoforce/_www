@@ -1,510 +1,411 @@
 <?php
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
-include_once(G5_LIB_PATH.'/thumbnail.lib.php');
-
-if ($bo_table == "score") {
-include_once(G5_EDITOR_LIB);
-$view['content'] = editormd_view($view['wr_content'],"bo_v_con");
-}
-
-
-
-// SyntaxHighLighter
-if(isset($boset['na_code']) && $boset['na_code'])
-	na_script('code');
+if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css" media="screen">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.G5_EDITOR_URL.'/vditor3/dist/index.css">', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/dist/index.min.js"></script>', 0);
+add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/editorOptions.js"></script>', 0);
+
+// Clip Modal
+na_script('clip');
 
 // 컬러
 $bo_color = ($boset['color']) ? $boset['color'] : 'navy';
 
-// SEO 이미지
-$view['seo_img'] = na_wr_img($bo_table, $view);
+// 임시 저장된 글 기능 : AutoSave Modal
+if ($is_member)
+	na_script('autosave');
 
-// SEO 등과 공용사용
-$view_subject = get_text($view['wr_subject']);
-
+if($is_dhtml_editor) {
 ?>
-
-<script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
-<!--클립보드 JS 및 스타일 설정 시작-->
-<script src="<?php echo G5_JS_URL; ?>/clipboard.min.js"></script>
-<script>
-var clipboard = new ClipboardJS('.btn-clipboard-subject', {
-        text: function() {
-            return '<?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?>';
-        }
-    });
-
-    clipboard.on('success', function(e) {
-        console.log(e);
-    });
-
-    clipboard.on('error', function(e) {
-        console.log(e);
-    });
-</script>
 <style>
-button.btn-clipboard-subject {display:inline-block;margin:0;padding:5px 7px;line-height:12px;border:0px solid #ccc;background:#FFFFFF;color:#555;text-decoration:none}
-button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#000}
+	#wr_content { border:0; display:none; }
 </style>
-<!--클립보드 JS 및 스타일 설정 끝-->
-<script>
+<?php } ?>
 
-Vditor.preview(document.getElementById('bo_v_con'), {
+<div id="bo_w">
+    <h2 class="sound_only"><?php echo $g5['title'] ?></h2>
 
-    customEmoji : emojiOptions,
+	<!-- 게시물 작성/수정 시작 { -->
+	<form name="fwrite" id="fwrite" action="<?php echo $action_url ?>" onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data" autocomplete="off" role="form" class="form-horizontal">
+	<input type="hidden" name="uid" value="<?php echo get_uniqid(); ?>">
+	<input type="hidden" name="w" value="<?php echo $w ?>">
+	<input type="hidden" name="bo_table" value="<?php echo $bo_table ?>">
+	<input type="hidden" name="wr_id" value="<?php echo $wr_id ?>">
+	<input type="hidden" name="sca" value="<?php echo $sca ?>">
+	<input type="hidden" name="sfl" value="<?php echo $sfl ?>">
+	<input type="hidden" name="stx" value="<?php echo $stx ?>">
+	<input type="hidden" name="spt" value="<?php echo $spt ?>">
+	<input type="hidden" name="sst" value="<?php echo $sst ?>">
+	<input type="hidden" name="sod" value="<?php echo $sod ?>">
+	<input type="hidden" name="page" value="<?php echo $page ?>">
+	<?php
+		$option = '';
+		$option_hidden = '';
+		if ($is_notice || $is_html || $is_secret || $is_mail) {
+			if ($is_notice) {
+				$option .= "\n".'<label class="checkbox-inline"><input type="checkbox" id="notice" name="notice" value="1" '.$notice_checked.'> 공지</label>';
+			}
 
-})
-
-</script>
-
-<!-- 게시물 읽기 시작 { -->
-
-<article id="bo_v">
-    <header>
-		<?php if ($category_name) { ?>
-			<div class="bo_v_cate f-small">
-				<span class="sound_only">분류</span>
-				<?php echo $view['ca_name'] ?>
-			</div>
-		<?php } ?>
-		<h2 id="bo_v_title" class="f-lg">
-            <?php echo $view_subject; // 글제목 출력 ?>
-        </h2>
-    </header>
-        <?php if(G5_IS_MOBILE) {?>
-            <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-                <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
-            <?php } ?>
-        <?php if(!G5_IS_MOBILE) {?>
-            <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-        <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="click focus" data-placement="right" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
-        <?php } ?>
-    <section id="bo_v_info">
-        <h3 class="sound_only">페이지 정보</h3>
-		<div class="profile-info f-small">
-			<div class="pull-left">
-				<span class="sound_only">작성자</span>
-				<?php echo na_name_photo($view['mb_id'], $view['name']); ?>
-				<?php if ($is_ip_view) { ?>
-					<span class="space-fa">
-						<span class="sound_only">아이피</span>
-						<i class="fa fa-map-marker cursor" aria-hidden="true" title="<?php echo $ip ?>" data-toggle="tooltip" data-placement="top"></i> 						
-					</span>
-				<?php } ?>
-			</div>
-			<div class="pull-right text-muted">
-				<span class="sound_only">작성일</span>
-				<i class="fa fa-clock-o" aria-hidden="true"></i> 
-				<time datetime="<?php echo date('Y-m-d\TH:i:s+09:00', strtotime($view['wr_datetime'])) ?>"><?php echo date("Y.m.d H:i", strtotime($view['wr_datetime'])) ?></time>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-
-		<div class="content-info f-small">
-        	<div class="pull-left">
-				<span class="space-right">
-					<span class="sound_only">조회</span>
-					<i class="fa fa-eye" aria-hidden="true"></i>
-					<?php echo number_format($view['wr_hit']) ?>
-				</span>
-				 <?php if($view['wr_comment']) { ?>
-					<span class="space-right">
-						<a href="#bo_vc">       		 	
-							<span class="sound_only">댓글</span>
-							 <i class="fa fa-commenting-o" aria-hidden="true"></i>
-							 <b class="orangered"><?php echo number_format($view['wr_comment']) ?></b>
-						 </a>
-					</span>
-				 <?php } ?>
-			</div>
-        	<div class="pull-right">
-				<!-- 게시물 상단 버튼 시작 { -->
-				<div id="bo_v_btn">
-					<?php ob_start(); ?>
-
-					<ul class="btn_bo_user bo_v_com">
-						<li>
-							<a href="<?php echo $list_href ?>" class="btn_custom_view_03 btn" title="목록" role="button">
-								<span class="">목록</span>
-							</a>
-						</li>
-						<?php if ($reply_href) { ?>
-							<li>
-								<a href="<?php echo $reply_href ?>" class="btn_custom_view_01 btn" title="답변" role="button">
-									<span class="">답변</span>
-								</a>
-							</li>
-						<?php } ?>
-						<?php if ($write_href) { ?>
-							<li>
-								<a href="<?php echo $write_href ?>" class="btn_custom_view_02 btn" title="글쓰기" role="button">
-									<span class="">글쓰기</span>
-								</a>
-							</li>
-						<?php } ?>
-						<?php if($update_href || $delete_href || $copy_href || $move_href || $search_href) { ?>
-						<li>
-							<button type="button" class="btn_more_opt is_view_btn btn_b01 btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span class="sound_only">게시판 리스트 옵션</span></button>
-							<ul class="more_opt is_view_btn"> 
-								<?php if ($update_href) { ?>
-									<li>
-										<a href="<?php echo $update_href ?>">
-											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-											글수정
-										</a>
-									</li>
-								<?php } ?>
-								<?php if ($delete_href) { ?>
-									<li>
-										<a href="<?php echo $delete_href ?>" onclick="del(this.href); return false;">
-											<i class="fa fa-trash-o" aria-hidden="true"></i>
-											글삭제
-										</a>
-									</li>
-								<?php } ?>
-								<?php if ($copy_href) { ?>
-									<li>
-										<a href="<?php echo $copy_href ?>" onclick="board_move(this.href); return false;">
-											<i class="fa fa-files-o" aria-hidden="true"></i>
-											글복사		
-										</a>
-									</li>
-								<?php } ?>
-								<?php if ($move_href) { ?>
-									<li>
-										<a href="<?php echo $move_href ?>" onclick="board_move(this.href); return false;">
-											<i class="fa fa-arrows" aria-hidden="true"></i>
-											글이동
-										</a>
-									</li>
-								<?php } ?>
-								<?php if ($search_href) { ?>
-									<li>
-										<a href="<?php echo $search_href ?>">
-											<i class="fa fa-search" aria-hidden="true"></i>
-											글검색
-										</a>
-									</li>
-								<?php } ?>
-							</ul> 
-						</li>
-						<?php } ?>
-					</ul>
-					<?php
-					$link_buttons = ob_get_contents();
-					ob_end_flush();
-					?>
-					<script>
-					jQuery(function($){
-						// 게시판 보기 버튼 옵션
-						$(".btn_more_opt.is_view_btn").on("click", function(e) {
-							e.stopPropagation();
-							$(".more_opt.is_view_btn").toggle();
-						})
-		;
-						$(document).on("click", function (e) {
-							if(!$(e.target).closest('.is_view_btn').length) {
-								$(".more_opt.is_view_btn").hide();
-							}
-						});
-					});
-					</script>
-				</div>
-				<!-- } 게시물 상단 버튼 끝 -->
-			</div>
-			<div class="clearfix"></div>
-		</div>
-    </section>
-
-    <section id="bo_v_atc">
-        <h3 class="sound_only">본문</h3>
-        <!-- 본문 내용 시작 { -->
-        <div id="bo_v_con" class="f-content">
-
-			<?php if(IS_NA_BBS && $is_admin && $view['as_type'] == "-1") { // 신고처리 ?>
-				<p class="shingo">신고처리된 게시물입니다.</p>
-			<?php } ?>
-
-			<?php
-				// 첨부 동영상 출력 - 이미지출력보다 위에 있어야 함
-				if($boset['na_video_attach'])
-					echo na_video_attach();
-
-				// 링크 동영상 출력
-				if($boset['na_video_link'])
-					echo na_video_link($view['link']);
-
-				// 이미지 출력
-				$v_img_count = count($view['file']);
-				if($v_img_count) {
-					echo "<div id=\"bo_v_img\">\n";
-					for ($i=0; $i<=$v_img_count; $i++) {
-						echo get_file_thumbnail($view['file'][$i]);
-					}
-					echo "</div>\n";
+			if ($is_html) {
+				if ($is_dhtml_editor) {
+					$option_hidden .= '<input type="hidden" value="html1" name="html">';
+				} else {
+					$option .= "\n".'<label class="checkbox-inline"><input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" value="'.$html_value.'" '.$html_checked.'> HTML</label>';
 				}
+			}
 
-				// 글내용 출력
-				echo na_content(get_view_thumbnail($view['content']));
-				//echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
-			?>
-		</div>
-        <!-- } 본문 내용 끝 -->
-
-		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
-			<div id="bo_v_btn_group">
-				<div class="btn-group btn-group-lg" role="group">
-					<?php if ($board['bo_use_good']) { // 추천 ?>
-						<button type="button" onclick="na_good('<?php echo $bo_table ?>', '<?php echo $wr_id ?>', 'good', 'wr_good');" class="btn btn-white" title="추천">
-							<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-							<span class="sound_only">추천</span>
-							<b id="wr_good" class="orangered"><?php echo number_format($view['wr_good']) ?></b>
-						</button>
-					<?php } ?>
-
-					<?php if ($board['bo_use_nogood']) { // 비추천 ?>
-						<button type="button" onclick="na_good('<?php echo $bo_table ?>', '<?php echo $wr_id ?>', 'nogood', 'wr_nogood');" class="btn btn-white" title="비추천">
-							<i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-							<span class="sound_only">비추천</span>
-							<b id="wr_nogood"><?php echo number_format($view['wr_nogood']) ?></b>
-						</button>
-					<?php } ?>
-					<?php if ($scrap_href) { // 스크랩 ?>
-						<button type="button" class="btn btn-white" onclick="win_scrap('<?php echo $scrap_href ?>');" title="스크랩">
-							<i class="fa fa-bookmark" aria-hidden="true"></i>
-							<span class="sound_only">스크랩</span>
-						</button>
-					<?php } ?>
-
-					<?php if($board['bo_use_sns']) { // SNS 공유 ?>
-						<button type="button" class="btn btn-white" data-toggle="modal" data-target="#bo_snsModal" title="SNS 공유">
-							<i class="fa fa-share-alt" aria-hidden="true"></i>
-							<span class="sound_only">SNS 공유</span>
-						</button>
-					<?php } ?>
-					<?php if (IS_NA_BBS && $boset['na_shingo']) { // 신고 ?>
-						<button type="button" class="btn btn-white" onclick="na_shingo('<?php echo $bo_table ?>', '<?php echo $wr_id ?>');" title="신고">
-							<i class="fa fa-ban" aria-hidden="true"></i>
-							<span class="sound_only">신고</span>
-						</button>
-					<?php } ?>
-				</div>
-			</div>
-		<?php } ?>
-		<?php if($view['as_tag']) { // 태그 ?>
-			<p class="bo_v_tags">
-				<i class="fa fa-tags light" aria-hidden="true"></i>
-				<?php echo na_get_tag($view['as_tag']) ?>
-			</p>
-		<?php } ?>
-
-		<?php 
-			// 서명 애드온 : /plugin/nariya/skin/addon/sign-basic 폴더	
-			if ($is_signature && $signature) 
-				echo na_addon('sign-basic'); 
-		?>
-
-	</section>
-
-    <section id="bo_v_data" class="f-small">
-        <h3 class="sound_only">관련자료</h3>
-		<ul>
-		<?php if(isset($view['link'][1]) && $view['link'][1]) { ?>
-	    <!-- 관련링크 시작 { -->
-		<li class="tr">
-			<div class="td td-th">
-				링크
-			</div>
-			<div class="td">
-				<?php
-				// 링크
-				$cnt = 0;
-				for ($i=1; $i<=count($view['link']); $i++) {
-					if ($view['link'][$i]) {
-						$cnt++;
-					?>
-					<p>
-						<a href="<?php echo $view['link_href'][$i] ?>" target="_blank">
-							<i class="fa fa-link td-first light" aria-hidden="true"></i>
-							<?php echo get_text($view['link'][$i]) ?>
-							<?php if($view['link_hit'][$i]) { ?>
-								<span class="sound_only">방문</span>
-								<span class="count orangered">+<?php echo $view['link_hit'][$i] ?></span>
-							<?php } ?>
-						</a>
-					</p>	
-					<?php
-					}
+			if ($is_secret) {
+				if ($is_admin || $is_secret==1) {
+					$option .= "\n".'<label class="checkbox-inline"><input type="checkbox" id="secret" name="secret" value="secret" '.$secret_checked.'> 비밀글</label>';
+				} else {
+					$option_hidden .= '<input type="hidden" name="secret" value="secret">';
 				}
-				?>
-			</div>
-		</li>
-	    <!-- } 관련링크 끝 -->
-		<?php } ?>
-    
-		<?php
-		$cnt = 0;
-		if ($view['file']['count']) {
-			for ($i=0; $i<count($view['file']); $i++) {
-				if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view'])
-					$cnt++;
+			}
+
+			// 게시판 플러그인 사용시
+			if (IS_NA_BBS && $is_notice) {
+				$as_checked = ($write['as_type'] == "1") ? ' checked' : '';
+				$option .= "\n".'<label class="checkbox-inline"><input type="checkbox" id="as_type" name="as_type" value="1" '.$as_checked.'> 메인글</label>';
+			}
+
+			if ($is_mail) {
+				$option .= "\n".'<label class="checkbox-inline"><input type="checkbox" id="mail" name="mail" value="mail" '.$recv_email_checked.'> 답변메일받기</label>';
 			}
 		}
-		?>
 
-		<?php if($cnt) { ?>
-		<!-- 첨부파일 시작 { -->
-		<li class="tr">
-			<div class="td td-th">
-				첨부
-			</div>
-			<div class="td">
-				<?php
-				// 가변 파일
-				for ($i=0; $i<count($view['file']); $i++) {
-					if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view']) {
-				?>
-				<p>
-					<a href="<?php echo $view['file'][$i]['href'] ?>" class="view_file_download" title="<?php echo $view['file'][$i]['content'] ?>">
-						<i class="fa fa-download td-first light" aria-hidden="true"></i>
-						<?php echo $view['file'][$i]['source'] ?>
-						<span class="sound_only">파일크기</span>
-						(<?php echo $view['file'][$i]['size'] ?>)
-						<span class="light">
-							-
-							<span class="sound_only">등록일</span>
-							<?php echo date("Y.m.d H:i", strtotime($view['file'][$i]['datetime'])) ?>
-						</span>
-						<?php if($view['file'][$i]['download']) { ?>
-							<span class="sound_only">다운로드</span>
-							<span class="count orangered">+<?php echo $view['file'][$i]['download'] ?></span>
-						<?php } ?>
-					</a>
-				</p>
-				<?php
-					}
-				}
-				?>
-			</div>
-		</li>
-		<!-- } 첨부파일 끝 -->
-		<?php } ?>
-
-		<?php if ($prev_href) { ?>
-		<!-- 이전글 시작 { -->
-		<li class="tr">
-			<div class="td td-th">
-				이전
-			</div>
-			<div class="td">
-				<a href="<?php echo $prev_href ?>">
-					<i class="fa fa-chevron-up td-first light" aria-hidden="true"></i>
-					<?php echo $prev_wr_subject;?>
-					<span class="light">
-						-
-						<span class="sound_only">작성일</span>
-						<?php echo date("Y.m.d H:i", strtotime($prev_wr_date)) ?>
-					</span>
-				</a>
-			</div>
-		</li>
-		<!-- } 이전글 끝 -->
-		<?php } ?>		
-
-		<?php if ($next_href) { ?>
-		<!-- 다음글 시작 { -->
-		<li class="tr">
-			<div class="td td-th">
-				다음
-			</div>
-			<div class="td">
-				<a href="<?php echo $next_href ?>">
-					<i class="fa fa-chevron-down td-first light" aria-hidden="true"></i>
-					<?php echo $next_wr_subject;?>
-					<span class="light">
-						-
-						<span class="sound_only">작성일</span>
-						<?php echo date("Y.m.d H:i", strtotime($next_wr_date)) ?>
-					</span>
-				</a>
-			</div>
-		</li>
-		<!-- } 다음글 끝 -->
-		<?php } ?>		
-		</ul>
-	</section>
-
-    <?php
-    // 코멘트 입출력
-	$is_ajax_comment = false;
-	if(isset($boset['na_crows']) && $boset['na_crows']) { // 페이징 댓글
-	    include_once(NA_PLUGIN_PATH.'/comment_view.php');
-	} else {
-		include_once(G5_BBS_PATH.'/view_comment.php');
-	}
+		echo $option_hidden;
 	?>
 
-	<?php echo $link_buttons; // 버튼 출력 ?>
+	<?php if ($is_category) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">분류<strong class="sound_only">필수</strong></label>
+			<div class="col-sm-4">
+				<select name="ca_name" id="ca_name" required class="form-control">
+					<option value="">선택하세요</option>
+					<?php echo $category_option ?>
+				</select>
+			</div>
+		</div>
+	<?php } ?>
 
-	<div class="clearfix"></div>
-</article>
-<!-- } 게시판 읽기 끝 -->
+	<?php if ($is_name) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wr_name">이름<strong class="sound_only">필수</strong></label>
+			<div class="col-sm-4">
+				<input type="text" name="wr_name" value="<?php echo $name ?>" id="wr_name" required class="form-control required" maxlength="20">
+			</div>
+		</div>
+	<?php } ?>
 
+	<?php if ($is_password) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wr_password">비밀번호<strong class="sound_only">필수</strong></label>
+			<div class="col-sm-4">
+				<input type="password" name="wr_password" id="wr_password" <?php echo $password_required ?> class="form-control <?php echo $password_required ?>" maxlength="20">
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php if ($is_email) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wr_email">E-mail</label>
+			<div class="col-sm-7">
+				<input type="text" name="wr_email" id="wr_email" value="<?php echo $email ?>" class="form-control email" maxlength="100">
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php if ($is_homepage) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wr_homepage">홈페이지</label>
+			<div class="col-sm-7">
+				<input type="text" name="wr_homepage" id="wr_homepage" value="<?php echo $homepage ?>" class="form-control">
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php if ($option) { ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">옵션</label>
+			<div class="col-sm-10">
+				<?php echo $option ?>
+			</div>
+		</div>
+	<?php } ?>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="wr_subject">제목<strong class="sound_only">필수</strong></label>
+		<div class="col-sm-10">
+			<input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="form-control required" maxlength="255">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-12 f-small">
+		   <span class="sound_only">내용<strong>필수</strong></span>
+			<?php if($write_min || $write_max) { ?>
+				<!-- 최소/최대 글자 수 사용 시 -->
+				<div class="well well-sm f-sm">
+					<p id="char_count_desc">이 게시판은 최소 <strong><?php echo $write_min; ?></strong>글자 이상, 최대 <strong><?php echo $write_max; ?></strong>글자 이하까지 글을 쓰실 수 있습니다.</p>
+				</div>
+			<?php } ?>
+
+			<?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
+
+			<div class="bo_w_opt">
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-white" title="이모티콘" onclick="na_clip('emo', '<?php echo $is_dhtml_editor ?>');">
+						<i class="fa fa-smile-o" aria-hidden="true"></i>
+						<span class="sound_only">이모티콘</span>
+					</button>
+					<button type="button" class="btn btn-white" title="폰트어썸 아이콘" onclick="na_clip('fa', '<?php echo $is_dhtml_editor ?>');">
+						<i class="fa fa-font-awesome" aria-hidden="true"></i>
+						<span class="sound_only">폰트어썸 아이콘</span>
+					</button>
+					<button type="button" class="btn btn-white" title="동영상" onclick="na_clip('video', '<?php echo $is_dhtml_editor ?>');">
+						<i class="fa fa-youtube-play" aria-hidden="true"></i>
+						<span class="sound_only">동영상</span>
+					</button>
+					<button type="button" class="btn btn-white" title="지도" onclick="na_clip('map', '<?php echo $is_dhtml_editor ?>');">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+						<span class="sound_only">지도</span>
+					</button>
+					<?php if ($is_member) { // 임시 저장된 글 기능 ?>
+						<button type="button" id="btn_autosave" data-toggle="modal" data-target="#saveModal" class="btn btn-white" title="임시 저장된 글 목록 열기">
+							<i class="fa fa-repeat" aria-hidden="true"></i>
+							<span class="sound_only">임시저장글</span>
+							<span id="autosave_count" class="orangered"><?php echo $autosave_count; ?></span>
+						</button>
+					<?php } ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php if(isset($boset['na_tag']) && $boset['na_tag']) { //태그 ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="as_tag">태그</label>
+			<div class="col-sm-10">
+				<input type="text" name="as_tag" id="as_tag" value="<?php echo $write['as_tag']; ?>" class="form-control" placeholder="콤마(,)로 구분하여 복수 태그 등록 가능">
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php for ($i=1; $is_link && $i<=G5_LINK_COUNT; $i++) {
+		$link_holder = (isset($boset['na_video_link']) && $boset['na_video_link']) ? ' placeholder="유튜브, 네이버tv 등의 동영상 공유주소 자동출력"' : '';
+	?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="wr_link<?php echo $i ?>">링크 #<?php echo $i ?></label>
+			<div class="col-sm-10">
+				<input type="text" name="wr_link<?php echo $i ?>" value="<?php echo $write['wr_link'.$i]; ?>" id="wr_link<?php echo $i ?>" class="form-control"<?php echo $link_holder ?>>
+			</div>
+		</div>
+	<?php } ?>
+
+	<?php
+	// 첨부파일
+	if ($is_file) {
+		$file_script = "";
+		$file_length = -1;
+		// 수정의 경우 파일업로드 필드가 가변적으로 늘어나야 하고 삭제 표시도 해주어야 합니다.
+		if ($w == "u") {
+			for ($i=0; $i<$file['count']; $i++) {
+				if ($file[$i]['source']) {
+					$file_script .= "add_file(\"";
+					if ($is_file_content) {
+						$file_script .= "<div class='col-sm-6 col-15'><div class='form-group'><input type='text'name='bf_content[$i]' value='".addslashes(get_text($file[$i]['bf_content']))."' class='form-control' placeholder='파일에 대한 내용을 입력하세요.'></div></div>";
+					}
+					$file_script .= "<div class='col-sm-12 col-15'><div class='form-group'><label class='checkbox-inline'><input type='checkbox' name='bf_file_del[$i]' value='1'> {$file[$i]['source']}({$file[$i]['size']}) 파일 삭제</label> | <a href='{$file[$i]['href']}'>열기</a></div></div>";
+					$file_script .= "\");\n";
+				} else {
+					$file_script .= "add_file('');\n";
+				}
+			}
+			$file_length = $file['count'] - 1;
+		}
+
+		if ($file_length < 0) {
+			$file_script .= "add_file('');\n";
+			$file_length = 0;
+		}
+	?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label hidden-xs">첨부파일</label>
+			<div class="col-sm-10">
+				<button type="button" onclick="add_file();" class="btn btn-white btn-sm"><i class="fa fa-plus"></i> 파일추가</button>
+				<button type="button" onclick="del_file();" class="btn btn-white btn-sm"><i class="fa fa-times"></i> 파일삭제</button>
+			</div>
+		</div>
+		<div class="form-group" style="margin-bottom:0;">
+			<div class="col-sm-10 col-sm-offset-2 f-small">
+				<table id="variableFiles"></table>
+			</div>
+		</div>
+		<script>
+		var flen = 0;
+		function add_file(delete_code) {
+			var upload_count = <?php echo (int)$board['bo_upload_count']; ?>;
+			if (upload_count && flen >= upload_count) {
+				alert("이 게시판은 "+upload_count+"개 까지만 파일 업로드가 가능합니다.");
+				return;
+			}
+
+			var objTbl;
+			var objNum;
+			var objRow;
+			var objCell;
+			var objContent;
+			if (document.getElementById)
+				objTbl = document.getElementById("variableFiles");
+			else
+				objTbl = document.all["variableFiles"];
+
+			objNum = objTbl.rows.length;
+			objRow = objTbl.insertRow(objNum);
+			objCell = objRow.insertCell(0);
+
+			objContent = "<div class='row row-15'>";
+			objContent += "<div class='col-sm-6 col-15'><div class='form-group'><div class='input-group'><span class='input-group-addon'>파일 "+objNum+"</span><input type='file' name='bf_file[]' class='form-control' title='파일 용량 <?php echo $upload_max_filesize; ?> 이하만 업로드 가능'></div></div></div>";
+			if (delete_code) {
+				objContent += delete_code;
+			} else {
+				<?php if ($is_file_content) { ?>
+				objContent += "<div class='col-sm-6 col-15'><div class='form-group'><input type='text'name='bf_content[]' class='form-control' placeholder='파일에 대한 내용을 입력하세요.'></div></div>";
+				<?php } ?>
+				;
+			}
+			objContent += "</div>";
+
+			objCell.innerHTML = objContent;
+
+			flen++;
+		}
+
+		<?php echo $file_script; //수정시에 필요한 스크립트?>
+
+		function del_file() {
+			// file_length 이하로는 필드가 삭제되지 않아야 합니다.
+			var file_length = <?php echo (int)$file_length; ?>;
+			var objTbl = document.getElementById("variableFiles");
+			if (objTbl.rows.length - 1 > file_length) {
+				objTbl.deleteRow(objTbl.rows.length - 1);
+				flen--;
+			}
+		}
+		</script>
+	<?php } ?>
+
+	<?php if ($captcha_html) { //자동등록방지  ?>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">자동등록방지</label>
+			<div class="col-sm-10 f-small">
+				<?php echo $captcha_html; ?>
+			</div>
+		</div>
+	<?php } ?>
+
+	<div class="h20 clearfix"></div>
+
+	<div class="row row-20">
+		<div class="col-xs-6 col-20">
+	    	<a href="<?php echo get_pretty_url($bo_table); ?>" class="btn btn-white btn-lg btn-block">취소</a>
+		</div>
+		<div class="col-xs-6 col-20">
+	        <button type="submit" id="btn_submit" accesskey="s" class="btn btn-<?php echo $bo_color ?> btn-lg btn-block">작성완료</button>
+		</div>
+	</div>
+
+	</form>
+</div>
 <script>
-function board_move(href) {
-    window.open(href, "boardmove", "left=50, top=50, width=500, height=550, scrollbars=1");
-}
+<?php if($write_min || $write_max) { ?>
+// 글자수 제한
+var char_min = parseInt(<?php echo $write_min; ?>); // 최소
+var char_max = parseInt(<?php echo $write_max; ?>); // 최대
+check_byte("wr_content", "char_count");
 
 $(function() {
-	<?php if ($board['bo_download_point'] < 0) { ?>
-	$("a.view_file_download").click(function() {
-        if(!g5_is_member) {
-            alert("다운로드 권한이 없습니다.\n회원이시라면 로그인 후 이용해 보십시오.");
-            return false;
-        }
+	$("#wr_content").on("keyup", function() {
+		check_byte("wr_content", "char_count");
+	});
+});
+<?php } ?>
 
-        var msg = "파일을 다운로드 하시면 포인트가 차감(<?php echo number_format($board['bo_download_point']) ?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?";
+function html_auto_br(obj) {
+	if (obj.checked) {
+		result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+		if (result)
+			obj.value = "html2";
+		else
+			obj.value = "html1";
+	}
+	else
+		obj.value = "";
+}
 
-        if(confirm(msg)) {
-            var href = $(this).attr("href")+"&js=on";
-            $(this).attr("href", href);
+function fwrite_submit(f) {
 
-            return true;
-        } else {
-            return false;
-        }
-    });
-	<?php } ?>
-	$("a.view_image").click(function() {
-        window.open(this.href, "large_image", "location=yes,links=no,toolbar=no,top=10,left=10,width=10,height=10,resizable=yes,scrollbars=no,status=no");
-        return false;
-    });
+	<?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
 
-    // 이미지 리사이즈
-    $("#bo_v_con").viewimageresize();
+	var subject = "";
+	var content = "";
+	$.ajax({
+		url: g5_bbs_url+"/ajax.filter.php",
+		type: "POST",
+		data: {
+			"subject": f.wr_subject.value,
+			"content": f.wr_content.value
+		},
+		dataType: "json",
+		async: false,
+		cache: false,
+		success: function(data, textStatus) {
+			subject = data.subject;
+			content = data.content;
+		}
+	});
+
+	if (subject) {
+		alert("제목에 금지단어('"+subject+"')가 포함되어있습니다");
+		f.wr_subject.focus();
+		return false;
+	}
+
+	if (content) {
+		alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+		if (typeof(ed_wr_content) != "undefined")
+			ed_wr_content.returnFalse();
+		else
+			f.wr_content.focus();
+		return false;
+	}
+
+	if (document.getElementById("char_count")) {
+		if (char_min > 0 || char_max > 0) {
+			var cnt = parseInt(check_byte("wr_content", "char_count"));
+			if (char_min > 0 && char_min > cnt) {
+				alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
+				return false;
+			}
+			else if (char_max > 0 && char_max < cnt) {
+				alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+				return false;
+			}
+		}
+	}
+
+	<?php echo $captcha_js; // 캡챠 사용시 자바스크립트에서 입력된 캡챠를 검사함  ?>
+
+	document.getElementById("btn_submit").disabled = "disabled";
+
+	return true;
+}
+
+$(function(){
+	$("#wr_content").addClass("form-control");
 });
 </script>
-<!-- } 게시글 읽기 끝 -->
 
-<?php if($board['bo_use_sns']) { ?>
-<!-- SNS 공유창 시작 { -->
-<div class="modal fade" id="bo_snsModal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<ul class="list-group">
-		<li class="list-group-item bg-navy no-border">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="white">&times;</span></button>
-			<b>SNS 공유</b>
-		</li>
-		<li class="list-group-item no-border">
-			<div id="bo_v_sns_icon">
-				<?php echo na_sns_share_icon('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'], $view_subject, $view['seo_img']); ?>
-			</div>
-		</li>
-		</ul>
-	</div>
-</div>
-<!-- } SNS 공유창 끝 -->
-<?php } ?>
+<div class="h20"></div>
