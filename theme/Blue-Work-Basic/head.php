@@ -72,6 +72,11 @@ if($is_index) { //인덱스는 와이드 고정
 		$is_page_col = 'two';
 		list($nt_side_url, $nt_side_path) = na_layout_content('side', $tset['page_side'], 'side-basic');
 	}
+	// 글쓰기 모드 일때만
+	if (basename($_SERVER['SCRIPT_NAME']) == "write.php") {
+        $is_page_col = 'one';
+    }
+
 }
 
 // 영역별 컨텐츠 경로

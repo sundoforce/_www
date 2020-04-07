@@ -76,13 +76,13 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				<?php if ($is_ip_view) { ?>
 					<span class="space-fa">
 						<span class="sound_only">아이피</span>
-						<i class="fa fa-map-marker cursor" aria-hidden="true" title="<?php echo $ip ?>" data-toggle="tooltip" data-placement="top"></i>
+						<i class="fa fa-map-marker cursor" aria-hidden="true" title="<?php echo $ip ?>" data-toggle="tooltip" data-placement="top"></i> 						
 					</span>
 				<?php } ?>
 			</div>
 			<div class="pull-right text-muted">
 				<span class="sound_only">작성일</span>
-				<i class="fa fa-clock-o" aria-hidden="true"></i>
+				<i class="fa fa-clock-o" aria-hidden="true"></i> 
 				<time datetime="<?php echo date('Y-m-d\TH:i:s+09:00', strtotime($view['wr_datetime'])) ?>"><?php echo date("Y.m.d H:i", strtotime($view['wr_datetime'])) ?></time>
 			</div>
 			<div class="clearfix"></div>
@@ -97,7 +97,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				</span>
 				 <?php if($view['wr_comment']) { ?>
 					<span class="space-right">
-						<a href="#bo_vc">
+						<a href="#bo_vc">       		 	
 							<span class="sound_only">댓글</span>
 							 <i class="fa fa-commenting-o" aria-hidden="true"></i>
 							 <b class="orangered"><?php echo number_format($view['wr_comment']) ?></b>
@@ -133,7 +133,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 						<?php if($update_href || $delete_href || $copy_href || $move_href || $search_href) { ?>
 						<li>
 							<button type="button" class="btn_more_opt is_view_btn btn_b01 btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span class="sound_only">게시판 리스트 옵션</span></button>
-							<ul class="more_opt is_view_btn">
+							<ul class="more_opt is_view_btn"> 
 								<?php if ($update_href) { ?>
 									<li>
 										<a href="<?php echo $update_href ?>">
@@ -154,7 +154,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 									<li>
 										<a href="<?php echo $copy_href ?>" onclick="board_move(this.href); return false;">
 											<i class="fa fa-files-o" aria-hidden="true"></i>
-											글복사
+											글복사		
 										</a>
 									</li>
 								<?php } ?>
@@ -174,7 +174,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 										</a>
 									</li>
 								<?php } ?>
-							</ul>
+							</ul> 
 						</li>
 						<?php } ?>
 					</ul>
@@ -233,10 +233,13 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				}
 
 				// 글내용 출력
-				echo na_content(get_view_thumbnail($view['content']));
-				//echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
+// 				echo na_content(get_view_thumbnail($view['content']));
+// 				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
+
 			?>
 		</div>
+		        <div id="bo_v_con2" class="f-content">
+
         <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
         <!-- } 본문 내용 끝 -->
 		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
@@ -286,14 +289,13 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</p>
 		<?php } ?>
 
-		<?php
-			// 서명 애드온 : /plugin/nariya/skin/addon/sign-basic 폴더
-			if ($is_signature && $signature)
-				echo na_addon('sign-basic');
+		<?php 
+			// 서명 애드온 : /plugin/nariya/skin/addon/sign-basic 폴더	
+			if ($is_signature && $signature) 
+				echo na_addon('sign-basic'); 
 		?>
 
 	</section>
-
     <section id="bo_v_data" class="f-small">
         <h3 class="sound_only">관련자료</h3>
 		<ul>
@@ -320,7 +322,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 								<span class="count orangered">+<?php echo $view['link_hit'][$i] ?></span>
 							<?php } ?>
 						</a>
-					</p>
+					</p>	
 					<?php
 					}
 				}
@@ -329,7 +331,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 		</li>
 	    <!-- } 관련링크 끝 -->
 		<?php } ?>
-
+    
 		<?php
 		$cnt = 0;
 		if ($view['file']['count']) {
@@ -397,7 +399,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</div>
 		</li>
 		<!-- } 이전글 끝 -->
-		<?php } ?>
+		<?php } ?>		
 
 		<?php if ($next_href) { ?>
 		<!-- 다음글 시작 { -->
@@ -418,7 +420,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</div>
 		</li>
 		<!-- } 다음글 끝 -->
-		<?php } ?>
+		<?php } ?>		
 		</ul>
 	</section>
 
@@ -475,7 +477,7 @@ $(function() {
 <!-- } 게시글 읽기 끝 -->
 
     <script>
-        Vditor.preview(document.getElementById('bo_v_con'),
+        Vditor.preview(document.getElementById('bo_v_con2'),
             document.getElementById('markdownText').textContent, {
                 className: 'preview vditor-reset',
                 customEmoji: emojiOptions,

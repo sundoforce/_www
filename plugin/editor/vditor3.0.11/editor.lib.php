@@ -38,12 +38,12 @@ function editor_html($id, $content, $is_dhtml_editor=true)
             $html .= "debugger: false,\n";
             $html .= "counter: 32768,\n";
             $html .= "height: 500,\n";
-            $html .= "mode: 'ir',\n";
+            $html .= "mode: 'sv',\n";
             $html .= "lang: 'ko_KR',\n";
             // lute.js 를 읽어 오는 곳..
             $html .= "cdn: '".$editor_url."',\n";
 			$html .= "typewriterMode: true,\n";
-			$html .= "placeholder: '디폴트가 Typora 스타일 위지위그 에디터입니다. 메뉴에서 원하는 스타일로 변경가능합니다.',\n";
+			$html .= "placeholder: '악보는 ```abc 엔터 ``` 를 입력 해보세요 ',\n";
             $html .= "tab: '\t',\n";
             $html .= "preview:{ markdown: { toc: true, }, hljs: { style: 'native', }, },\n";
 
