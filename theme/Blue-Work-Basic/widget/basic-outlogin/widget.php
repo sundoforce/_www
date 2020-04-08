@@ -13,7 +13,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$widget_url.'/widget.css">', 0);
 	<?php if($is_member) { //Login ?>
 		<div class="pull-right">
 			<a href="<?php echo G5_ATTENDANCE_URL ?>/attendance.php" class="l" data-placement="left">
-				<span class="text-muted"><i class="fa fa-paw fa-lg"></i></span>
+				<span class="text-name"><i class="fa fa-paw fa-lg"></i></span>
 			</a>
 		</div>
 		<div class="profile">

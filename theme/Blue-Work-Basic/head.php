@@ -72,9 +72,11 @@ if($is_index) { //인덱스는 와이드 고정
 		$is_page_col = 'two';
 		list($nt_side_url, $nt_side_path) = na_layout_content('side', $tset['page_side'], 'side-basic');
 	}
-	// 글쓰기 모드 일때만
-	if (basename($_SERVER['SCRIPT_NAME']) == "write.php") {
-        $is_page_col = 'one';
+	// 2020.04.08 by sdk
+	// 글쓰기 모드 그리고 수정일때만 원페이지로
+	if (basename($_SERVER['SCRIPT_NAME']) == "write.php") { // 글쓰기 모드
+	    if ($w == "u" ) // 수정 모드
+            $is_page_col = 'one';
     }
 
 }

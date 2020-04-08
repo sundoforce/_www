@@ -13,13 +13,13 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 </style>
 
 <div class="nt-view-side">
-<?php if($is_index) { // 인덱스에서만 출력 ?>
 	<!-- 로그인 시작 -->
 	<div class="hidden-xs">
 		<?php echo na_widget('work-outlogin'); // 외부로그인 위젯 ?>
 	</div>
 	<div class="h10"></div>
 	<!-- 로그인 끝 -->
+<?php if($is_index) { // 인덱스에서만 출력 ?>
 <?php } else { // 페이지에서는 메뉴 출력 ?>
 
 	<?php 

@@ -38,7 +38,14 @@ function editor_html($id, $content, $is_dhtml_editor=true)
             $html .= "debugger: false,\n";
             $html .= "counter: 32768,\n";
             $html .= "height: 500,\n";
-            $html .= "mode: 'sv',\n";
+            // 2020.04.08  by sdk
+            // 글쓰기 모드일떄는 type모드
+            // 수정일떄는 편집 모드
+             if ($w == "u" ) {
+                  $html .= "mode: 'sv',\n";
+             } else {
+                $html .= "mode: 'ir',\n";
+             }
             $html .= "lang: 'ko_KR',\n";
             // lute.js 를 읽어 오는 곳..
             $html .= "cdn: '".$editor_url."',\n";
