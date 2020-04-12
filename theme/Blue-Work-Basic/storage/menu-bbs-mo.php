@@ -3,7 +3,7 @@ if (!defined('_GNUBOARD_')) exit;
 $data=array (
   0 => 
   array (
-    'text' => '뮤지아소개',
+    'text' => '이용안내',
     'href' => 'https://muzia.net/content/company',
     'icon' => 'empty',
     'target' => '_self',
@@ -308,7 +308,7 @@ $data=array (
       array (
         'text' => '단골가게',
         'href' => 'https://muzia.net/store',
-        'icon' => 'fa fa-asl-interpreting',
+        'icon' => 'fa fa-automobile',
         'target' => '_self',
         'line' => '',
         'sp' => '',
@@ -321,18 +321,66 @@ $data=array (
       ),
       3 => 
       array (
-        'text' => '창조광장',
-        'href' => 'https://muzia.net/creative',
+        'text' => '회원광장',
+        'href' => '',
         'icon' => 'fa fa-angellist',
         'target' => '_self',
-        'line' => '',
+        'line' => '회원광장',
         'sp' => '1',
         'limit' => '',
         'grade' => 0,
-        'id' => 'bbs-board-creative',
-        'bo_table' => 'creative',
-        'wr_id' => NULL,
-        'sca' => NULL,
+        'id' => 'link',
+        's' => 
+        array (
+          0 => 
+          array (
+            'text' => '회원유튜브채널',
+            'href' => '',
+            'icon' => 'empty',
+            'target' => '_self',
+            'line' => '',
+            'sp' => '',
+            'limit' => '',
+            'grade' => 0,
+            'id' => 'link',
+          ),
+          1 => 
+          array (
+            'text' => '개인공간',
+            'href' => '',
+            'icon' => 'empty',
+            'target' => '_self',
+            'line' => '',
+            'sp' => '',
+            'limit' => '',
+            'grade' => 0,
+            'id' => 'link',
+          ),
+          2 => 
+          array (
+            'text' => '재능마켓',
+            'href' => '',
+            'icon' => 'empty',
+            'target' => '_self',
+            'line' => '',
+            'sp' => '',
+            'limit' => '',
+            'grade' => 0,
+            'id' => 'link',
+          ),
+          3 => 
+          array (
+            'text' => '구인구직',
+            'href' => '',
+            'icon' => 'empty',
+            'target' => '_self',
+            'line' => '',
+            'sp' => '',
+            'limit' => '',
+            'grade' => 0,
+            'id' => 'link',
+          ),
+        ),
       ),
     ),
   ),

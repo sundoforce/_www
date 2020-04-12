@@ -21,7 +21,7 @@ $data=array (
   'term' => '',
   'dayterm' => '',
   'gr_list' => '',
-  'bo_list' => 'music',
+  'bo_list' => 'music,creative',
   'ca_list' => '',
   'mb_list' => '',
 );

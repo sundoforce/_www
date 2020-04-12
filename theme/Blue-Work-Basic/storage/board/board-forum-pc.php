@@ -5,7 +5,6 @@ $data=array (
   'head_skin' => '',
   'head_color' => '',
   'color' => '',
-  'search_open' => '1',
   'cw' => '7',
   'cwlg' => '6',
   'cwmd' => '5',

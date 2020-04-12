@@ -110,7 +110,7 @@ function na_ext_type($file) {
 
 	$video = array("mp4", "m4v", "f4v", "mov", "flv", "webm");
 	$caption = array("vtt", "srt", "ttml", "dfxp");
-	$audio = array("acc", "m4a", "f4a", "mp3", "ogg", "oga");
+	$audio = array("acc", "m4a", "f4a", "mp3", "ogg", "oga", "midi", "mid");
 	$image = array("jpg", "jpeg", "gif", "png");
 	$pdf = array("pdf");
 	$torrent = array("torrent");

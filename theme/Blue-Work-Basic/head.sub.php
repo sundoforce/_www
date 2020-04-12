@@ -126,6 +126,11 @@ var g5_sca       = "<?php echo isset($sca)?$sca:''; ?>";
 var g5_editor    = "<?php echo ($config['cf_editor'] && $board['bo_use_dhtml_editor'])?$config['cf_editor']:''; ?>";
 var g5_plugin_url = "<?php echo G5_PLUGIN_URL ?>";
 var g5_cookie_domain = "<?php echo G5_COOKIE_DOMAIN ?>";
+
+var agent = navigator.userAgent.toLowerCase();
+
+if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) { console.log('IE'); }
+
 </script>
 <script src="<?php echo G5_JS_URL ?>/jquery-1.12.4.min.js"></script>
 <script src="<?php echo G5_JS_URL ?>/jquery-migrate-1.4.1.min.js"></script>

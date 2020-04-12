@@ -11,6 +11,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 add_stylesheet('<link rel="stylesheet" href="'.G5_EDITOR_URL.'/vditor3/dist/index.css">', 0);
 add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/dist/index.min.js"></script>', 0);
 add_javascript('<script src="'.G5_EDITOR_URL.'/vditor3/editorOptions.js"></script>', 0);
+
 // 컬러
 $bo_color = ($boset['color']) ? $boset['color'] : 'navy';
 
@@ -23,28 +24,7 @@ $view_subject = get_text($view['wr_subject']);
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
-<!--클립보드 JS 및 스타일 설정 시작-->
-<script src="<?php echo G5_JS_URL; ?>/clipboard.min.js"></script>
-<script>
-var clipboard = new ClipboardJS('.btn-clipboard-subject', {
-        text: function() {
-            return '<?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?>';
-        }
-    });
 
-    clipboard.on('success', function(e) {
-        console.log(e);
-    });
-
-    clipboard.on('error', function(e) {
-        console.log(e);
-    });
-</script>
-<style>
-button.btn-clipboard-subject {display:inline-block;margin:0;padding:5px 7px;line-height:12px;border:0px solid #ccc;background:#FFFFFF;color:#555;text-decoration:none}
-button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#000}
-</style>
-<!--클립보드 JS 및 스타일 설정 끝-->
 <!-- 게시물 읽기 시작 { -->
 
 <article id="bo_v">
@@ -59,14 +39,6 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
             <?php echo $view_subject; // 글제목 출력 ?>
         </h2>
     </header>
-    <?php if(G5_IS_MOBILE) {?>
-        <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-            <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="hover" data-placement="top" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
-        <?php } ?>
-    <?php if(!G5_IS_MOBILE) {?>
-        <div class="list-group-item break-word" style="padding:5px 8px; border-width:0px 0px 1px 0px;">
-    <button class="btn-clipboard-subject cursor at-tip" data-toggle="tooltip" data-trigger="click focus" data-placement="right" data-original-title="주소가 복사되었습니다."><i class="fa fa-share-alt"></i> 주소복사 : <?php echo G5_URL."/".$bo_table."/".$view['wr_id'];?></button></div>
-    <?php } ?>
     <section id="bo_v_info">
         <h3 class="sound_only">페이지 정보</h3>
 		<div class="profile-info f-small">
@@ -76,13 +48,13 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				<?php if ($is_ip_view) { ?>
 					<span class="space-fa">
 						<span class="sound_only">아이피</span>
-						<i class="fa fa-map-marker cursor" aria-hidden="true" title="<?php echo $ip ?>" data-toggle="tooltip" data-placement="top"></i> 						
+						<i class="fa fa-map-marker cursor" aria-hidden="true" title="<?php echo $ip ?>" data-toggle="tooltip" data-placement="top"></i>
 					</span>
 				<?php } ?>
 			</div>
 			<div class="pull-right text-muted">
 				<span class="sound_only">작성일</span>
-				<i class="fa fa-clock-o" aria-hidden="true"></i> 
+				<i class="fa fa-clock-o" aria-hidden="true"></i>
 				<time datetime="<?php echo date('Y-m-d\TH:i:s+09:00', strtotime($view['wr_datetime'])) ?>"><?php echo date("Y.m.d H:i", strtotime($view['wr_datetime'])) ?></time>
 			</div>
 			<div class="clearfix"></div>
@@ -97,7 +69,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				</span>
 				 <?php if($view['wr_comment']) { ?>
 					<span class="space-right">
-						<a href="#bo_vc">       		 	
+						<a href="#bo_vc">
 							<span class="sound_only">댓글</span>
 							 <i class="fa fa-commenting-o" aria-hidden="true"></i>
 							 <b class="orangered"><?php echo number_format($view['wr_comment']) ?></b>
@@ -112,28 +84,31 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 
 					<ul class="btn_bo_user bo_v_com">
 						<li>
-							<a href="<?php echo $list_href ?>" class="btn_custom_view_03 btn" title="목록" role="button">
-								<span class="">목록</span>
+							<a href="<?php echo $list_href ?>" class="btn_img_02 btn" title="목록" role="button">
+								<img class="board_icon" src="<?php echo $board_skin_url ?>/img/list-icon.png">목록
+								<span class="sound_only">목록</span>
 							</a>
 						</li>
 						<?php if ($reply_href) { ?>
 							<li>
-								<a href="<?php echo $reply_href ?>" class="btn_custom_view_01 btn" title="답변" role="button">
-									<span class="">답변</span>
+								<a href="<?php echo $reply_href ?>" class="btn_img_03 btn" title="답변" role="button">
+									<img class="board_icon" src="<?php echo $board_skin_url ?>/img/reply-icon.png">답변
+									<span class="sound_only">답변</span>
 								</a>
 							</li>
 						<?php } ?>
 						<?php if ($write_href) { ?>
 							<li>
-								<a href="<?php echo $write_href ?>" class="btn_custom_view_02 btn" title="글쓰기" role="button">
-									<span class="">글쓰기</span>
+								<a href="<?php echo $write_href ?>" class="btn_img_04 btn" title="글쓰기" role="button">
+									<img class="board_icon" src="<?php echo $board_skin_url ?>/img/pencil-icon.png">글쓰기
+									<span class="sound_only">글쓰기</span>
 								</a>
 							</li>
 						<?php } ?>
 						<?php if($update_href || $delete_href || $copy_href || $move_href || $search_href) { ?>
 						<li>
 							<button type="button" class="btn_more_opt is_view_btn btn_b01 btn"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><span class="sound_only">게시판 리스트 옵션</span></button>
-							<ul class="more_opt is_view_btn"> 
+							<ul class="more_opt is_view_btn">
 								<?php if ($update_href) { ?>
 									<li>
 										<a href="<?php echo $update_href ?>">
@@ -154,7 +129,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 									<li>
 										<a href="<?php echo $copy_href ?>" onclick="board_move(this.href); return false;">
 											<i class="fa fa-files-o" aria-hidden="true"></i>
-											글복사		
+											글복사
 										</a>
 									</li>
 								<?php } ?>
@@ -174,7 +149,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 										</a>
 									</li>
 								<?php } ?>
-							</ul> 
+							</ul>
 						</li>
 						<?php } ?>
 					</ul>
@@ -188,8 +163,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 						$(".btn_more_opt.is_view_btn").on("click", function(e) {
 							e.stopPropagation();
 							$(".more_opt.is_view_btn").toggle();
-						})
-		;
+						});
 						$(document).on("click", function (e) {
 							if(!$(e.target).closest('.is_view_btn').length) {
 								$(".more_opt.is_view_btn").hide();
@@ -233,16 +207,15 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 				}
 
 				// 글내용 출력
-// 				echo na_content(get_view_thumbnail($view['content']));
-// 				echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
-
+			//	echo na_content(get_view_thumbnail($view['content']));
+				//echo na_content($view['rich_content']); // {이미지:0} 과 같은 코드를 사용할 경우
 			?>
 		</div>
-        <div id="bo_v_con2" class="f-content">
-
-            <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
-        </div>
+		   <div id="bo_v_con2" class="f-content">
+                <textarea id="markdownText" class="preview" style="display:none;"><?php echo get_view_thumbnail($view['content']); ?></textarea>
+            </div>
         <!-- } 본문 내용 끝 -->
+
 		<?php if($board['bo_use_good'] || $board['bo_use_nogood'] || $scrap_href || $board['bo_use_sns']) { ?>
 			<div id="bo_v_btn_group">
 				<div class="btn-group btn-group-lg" role="group">
@@ -290,13 +263,14 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</p>
 		<?php } ?>
 
-		<?php 
-			// 서명 애드온 : /plugin/nariya/skin/addon/sign-basic 폴더	
-			if ($is_signature && $signature) 
-				echo na_addon('sign-basic'); 
+		<?php
+			// 서명 애드온 : /plugin/nariya/skin/addon/sign-basic 폴더
+			if ($is_signature && $signature)
+				echo na_addon('sign-basic');
 		?>
 
 	</section>
+
     <section id="bo_v_data" class="f-small">
         <h3 class="sound_only">관련자료</h3>
 		<ul>
@@ -323,7 +297,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 								<span class="count orangered">+<?php echo $view['link_hit'][$i] ?></span>
 							<?php } ?>
 						</a>
-					</p>	
+					</p>
 					<?php
 					}
 				}
@@ -332,7 +306,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 		</li>
 	    <!-- } 관련링크 끝 -->
 		<?php } ?>
-    
+
 		<?php
 		$cnt = 0;
 		if ($view['file']['count']) {
@@ -400,7 +374,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</div>
 		</li>
 		<!-- } 이전글 끝 -->
-		<?php } ?>		
+		<?php } ?>
 
 		<?php if ($next_href) { ?>
 		<!-- 다음글 시작 { -->
@@ -421,7 +395,7 @@ button.btn-clipboard-subject:focus, button.btn-clipboard-subject:hover {color:#0
 			</div>
 		</li>
 		<!-- } 다음글 끝 -->
-		<?php } ?>		
+		<?php } ?>
 		</ul>
 	</section>
 
@@ -476,7 +450,6 @@ $(function() {
 });
 </script>
 <!-- } 게시글 읽기 끝 -->
-
     <script>
         Vditor.preview(document.getElementById('bo_v_con2'),
             document.getElementById('markdownText').textContent, {
@@ -484,7 +457,6 @@ $(function() {
                 customEmoji: emojiOptions,
             })
     </script>
-
 <?php if($board['bo_use_sns']) { ?>
 <!-- SNS 공유창 시작 { -->
 <div class="modal fade" id="bo_snsModal" tabindex="-1" role="dialog" aria-hidden="true">
