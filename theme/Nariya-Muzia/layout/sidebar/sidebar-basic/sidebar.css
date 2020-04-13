@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 /********************************************************
-¡á SideBar : »çÀÌµå¹Ù(¸ð¹ÙÀÏ ¸Þ´º)
+ï¿½ï¿½ SideBar : ï¿½ï¿½ï¿½Ìµï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½)
 ********************************************************/
 
 /* sidebar Box */
@@ -147,13 +147,13 @@
 	line-height:42px; 
 }
 #nt_sidebar_menu .me-ul { 
-	background:#fff; 
+	background:#fff;
 }
 #nt_sidebar_menu .me-ul1 { 
 	background:#fafafa; 
 }
 #nt_sidebar_menu .me-ul2 { 
-	background:#fff; 
+	background:#fff;
 }
 
 #nt_sidebar_menu .me-li.active .me-a,
@@ -225,7 +225,7 @@
 }
 
 /********************************************************
-¡á Go Top & Bottom : »ó´Ü/ÇÏ´Ü ÀÌµ¿¹öÆ°
+ï¿½ï¿½ Go Top & Bottom : ï¿½ï¿½ï¿½/ï¿½Ï´ï¿½ ï¿½Ìµï¿½ï¿½ï¿½Æ°
 ********************************************************/
 #nt_bottom .go-btn { 
 	display:none; 
@@ -237,7 +237,7 @@
 }
 #nt_bottom .go-btn span { 
 	display: block; 
-	color:#fff; 
+	color:#fff;
 	background: rgba(0,0,0,0.5); 
 	margin:5px 0; 
 	text-align: center; 

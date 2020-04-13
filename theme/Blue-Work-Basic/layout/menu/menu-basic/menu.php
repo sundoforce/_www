@@ -6,6 +6,12 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.$nt_menu_url.'/menu.css">', 0);
 add_javascript('<script src="'.$nt_menu_url.'/menu.js"></script>', 0);
 
+// 2차 서브메뉴 너비 : 메뉴나눔에서 사용
+$is_sub_w = 170;
+
+// 전체메뉴 줄나눔
+$is_col_all = 6;
+
 ?>
 <style>
 #nt_menu .me-sw { 
@@ -14,151 +20,198 @@ add_javascript('<script src="'.$nt_menu_url.'/menu.js"></script>', 0);
 </style>
 <div id="nt_menu_wrap">
 
-        <div id="logo">
-            <a href="<?php echo G5_URL ?>"><img src="<?php echo G5_IMG_URL ?>/logo.png" alt="<?php echo $config['cf_title']; ?>"></a>
-        </div>
+	<!-- Mobile Header -->
+	<header id="header_mo" class="bg-<?php echo $tset['logo_color'] ?>">
+		<div class="nt-container">
+			<div class="header-wrap">
+				<div class="header-icon">
+					<a href="javascript:;" onclick="sidebar_open('sidebar-menu');">
+						<i class="fa fa-bars"></i>
+					</a>
+				</div>
+				<div class="header-logo en">
+					<!-- Mobile Logo -->
+					<a href="<?php echo NT_HOME_URL ?>">
+						<b><?php echo $tset['logo_text'] ?></b>
+					</a>
+				</div>
+				<div class="header-icon">
+					<a data-toggle="collapse" href="#search_mo" aria-expanded="false" aria-controls="search_mo">
+						<i class="fa fa-search"></i>
+					</a>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</header>
 
-        <div class="hd_sch_wr">
-            <fieldset id="hd_sch" >
-                <legend>사이트 내 전체검색</legend>
-                <form name="fsearchbox" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return fsearchbox_submit(this);">
-                <input type="hidden" name="sfl" value="wr_subject||wr_content">
-                <input type="hidden" name="sop" value="and">
-                <label for="sch_stx" class="sound_only">검색어 필수</label>
-                <input type="text" name="stx" id="sch_stx" maxlength="20" placeholder="검색어를 입력해주세요">
-                <button type="submit" id="sch_submit" value="검색"><i class="fa fa-search" aria-hidden="true"></i><span class="sound_only">검색</span></button>
-                </form>
+	<!-- Mobile Search -->
+	<div id="search_mo" class="collapse">
+		<div class="well well-sm no-margin" style="border-radius:0;">
+			<div class="nt-container">
+				<form name="mosearch" method="get" action="<?php echo G5_BBS_URL ?>/search.php" onsubmit="return tsearch_submit(this);" role="form" class="form no-margin">
+					<input type="hidden" name="sfl" value="wr_subject||wr_content">
+					<input type="hidden" name="sop" value="and">
+					<div class="input-group">
+						<input id="mo_top_search" type="text" name="stx" class="form-control" value="<?php echo $stx ?>" placeholder="검색어">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-<?php echo $tset['logo_color'] ?>"><i class="fa fa-search"></i></button>
+						</span>
+					</div>
+				</form>
+				<script>
+				$(function(){
+					$('#search_mo').on('shown.bs.collapse', function () {
+						$('#mo_top_search').focus();
+					});
+				});
+				</script>
+			</div>
+		</div>
+	</div>
 
-                <script>
-                function fsearchbox_submit(f)
-                {
-                    if (f.stx.value.length < 2) {
-                        alert("검색어는 두글자 이상 입력하십시오.");
-                        f.stx.select();
-                        f.stx.focus();
-                        return false;
-                    }
+	<nav id="nt_menu">
+		<div class="nt-container">
+			<div class="me-wrap">
+				<div class="me-cell me-head me-li<?php echo ($is_index) ? ' on' : ''; ?>">
+					<a href="javascript:;" data-toggle="collapse" data-target="#menu_all" class="me-a" title="전체메뉴">
+						<i class="fa fa-bars" aria-hidden="true"></i>
+					</a>
+				</div>
+				<div class="me-cell me-list">
+					<ul class="me-ul nav-slide">
+					<?php for ($i=0; $i < $menu_cnt; $i++) { 
+						$me = $menu[$i]; 
+					?>
+						<li class="me-li<?php echo ($me['on']) ? ' on' : ''; ?>">
+							<a class="me-a" href="<?php echo $me['href'];?>" target="<?php echo $me['target'];?>">
+								<i class="<?php echo $me['icon'] ?>" aria-hidden="true"></i>
+								<?php echo $me['text'];?>
+							</a>
+							<?php if(isset($me['s'])) { //Is Sub Menu ?>
+								<div class="sub-slide sub-1div">
+									<ul class="sub-1dul">
+									<?php for($j=0; $j < count($me['s']); $j++) { 
+											$me1 = $me['s'][$j]; 
+									?>
+										<?php if($me1['line']) { //구분라인 ?>
+											<li class="sub-1line"><a class="me-sh sub-1da"><?php echo $me1['line'];?></a></li>
+										<?php } ?>
 
-                    // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
-                    var cnt = 0;
-                    for (var i=0; i<f.stx.value.length; i++) {
-                        if (f.stx.value.charAt(i) == ' ')
-                            cnt++;
-                    }
+										<li class="sub-1dli<?php echo ($me1['on']) ? ' on' : ''; ?>">
+											<a href="<?php echo $me1['href'];?>" class="me-sh sub-1da<?php echo (isset($me1['s'])) ? ' sub-icon' : '';?>" target="<?php echo $me1['target'];?>">
+												<i class="<?php echo $me1['icon'] ?>" aria-hidden="true"></i>
+												<?php echo $me1['text'];?>
+											</a>
+											<?php if(isset($me1['s'])) { // Is Sub Menu ?>
+												<div class="sub-slide sub-2div">
+													<ul class="sub-2dul me-sw pull-left">					
+													<?php 
+														$me_sw2 = 0; //나눔 체크
+														for($k=0; $k < count($me1['s']); $k++) { 
+															$me2 = $me1['s'][$k];
+													?>
+														<?php if($me2['sp']) { //나눔 ?>
+															</ul>
+															<ul class="sub-2dul me-sw pull-left">
+														<?php $me_sw2++; } // 나눔 카운트 ?>
 
-                    if (cnt > 1) {
-                        alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
-                        f.stx.select();
-                        f.stx.focus();
-                        return false;
-                    }
+														<?php if($me2['line']) { //구분라인 ?>
+															<li class="sub-2line"><a class="me-sh sub-2da"><?php echo $me2['line'];?></a></li>
+														<?php } ?>
 
-                    return true;
-                }
-                </script>
+														<li class="sub-2dli<?php echo ($me2['on']) ? ' on' : ''; ?>">
+															<a href="<?php echo $me2['href'] ?>" class="me-sh sub-2da" target="<?php echo $me2['target'] ?>">
+																<i class="<?php echo $me2['icon'] ?>" aria-hidden="true"></i>
+																<?php echo $me2['text'];?>
+															</a>
+														</li>
+													<?php } ?>
+													</ul>
+													<?php $me_sw2 = ($me_sw2) ? ($is_sub_w * ($me_sw2 + 1)) : 0; //서브메뉴 너비 ?>
+													<div class="clearfix"<?php echo ($me_sw2) ? ' style="width:'.$me_sw2.'px;"' : '';?>></div>
+												</div>
+											<?php } ?>
+										</li>
+									<?php } //for ?>
+									</ul>
+								</div>
+							<?php } ?>
+						</li>
+					<?php } //for ?>
+					<?php if(!$menu_cnt) { ?>
+						<li class="me-li">
+							<a class="me-a" href="javascript:;">테마설정 > 메뉴설정에서 사용할 메뉴를 등록해 주세요.</a>
+						</li>
+					<?php } ?>
+					</ul>							
+				</div>
+				<div class="me-cell me-tail me-li">
+					<a href="javascript:;" onclick="sidebar_open('sidebar-menu'); return false;" class="me-a" title="마이메뉴">
+						<i class="fa fa-toggle-on" aria-hidden="true"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav>
 
-            </fieldset>
+	<!-- 전체 메뉴 -->
+	<nav id="nt_menu_all" class="me-all">
+		<div id="menu_all" class="collapse">
+			<div class="nt-container table-responsive">
+				<table class="table">
+				<tr>
+				<?php 
+					$az = 0;
+					for ($i=0; $i < $menu_cnt; $i++) {
 
-            <?php echo popular('theme/basic'); // 인기검색어, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정  ?>
-        </div>
-        <ul id="hd_qnb">
-            <li><a href="<?php echo G5_BBS_URL ?>/faq.php"><i class="fa fa-question" aria-hidden="true"></i><span>FAQ</span></a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/qalist.php"><i class="fa fa-comments" aria-hidden="true"></i><span>1:1문의</span></a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/current_connect.php" class="visit"><i class="fa fa-users" aria-hidden="true"></i><span>접속자</span><strong class="visit-num"><?php echo connect('theme/basic'); // 현재 접속자수, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정  ?></strong></a></li>
-            <li><a href="<?php echo G5_BBS_URL ?>/new.php"><i class="fa fa-history" aria-hidden="true"></i><span>새글</span></a></li>
-        </ul>
-    </div>
+						$me = $menu[$i]; 
 
-    <nav id="gnb">
-        <h2>메인메뉴</h2>
-        <div class="gnb_wrap">
-            <ul id="gnb_1dul">
-                <li class="gnb_1dli gnb_mnal"><button type="button" class="gnb_menu_btn"><i class="fa fa-bars" aria-hidden="true"></i><span class="sound_only">전체메뉴열기</span></button></li>
-                <?php
-				$menu_datas = get_menu_db(0, true);
-				$gnb_zindex = 999; // gnb_1dli z-index 값 설정용
-                $i = 0;
-                foreach( $menu_datas as $row ){
-                    if( empty($row) ) continue;
-                ?>
-                <li class="gnb_1dli" style="z-index:<?php echo $gnb_zindex--; ?>">
-                    <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da"><?php echo $row['me_name'] ?></a>
-                    <?php
-                    $k = 0;
-                    foreach( (array) $row['sub'] as $row2 ){
+						// 줄나눔
+						if($az && $az%$is_col_all == 0) {
+							echo '</tr><tr>'.PHP_EOL;
+						}
+				?>
+					<td class="<?php echo $me['on'];?>">
+						<a class="me-a" href="<?php echo $me['href'];?>" target="<?php echo $me['target'];?>">
+							<i class="<?php echo $me['icon'] ?>" aria-hidden="true"></i>
+							<?php echo $me['text'];?>
+						</a>
+						<?php if(isset($me['s'])) { //Is Sub Menu ?>
+							<div class="sub-1div">
+								<ul class="sub-1dul">
+								<?php for($j=0; $j < count($me['s']); $j++) { 
+										$me1 = $me['s'][$j]; 
+								?>
 
-                        if( empty($row2) ) continue;
+									<?php if($me1['line']) { //구분라인 ?>
+										<li class="sub-1line"><a class="me-sh"><?php echo $me1['line'];?></a></li>
+									<?php } ?>
 
-                        if($k == 0)
-                            echo '<span class="bg">하위분류</span><ul class="gnb_2dul">'.PHP_EOL;
-                    ?>
-                        <li class="gnb_2dli"><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>" class="gnb_2da"><?php echo $row2['me_name'] ?></a></li>
-                    <?php
-                    $k++;
-                    }   //end foreach $row2
-
-                    if($k > 0)
-                        echo '</ul>'.PHP_EOL;
-                    ?>
-                </li>
-                <?php
-                $i++;
-                }   //end foreach $row
-
-                if ($i == 0) {  ?>
-                    <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) { ?> <a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php } ?></li>
-                <?php } ?>
-            </ul>
-            <div id="gnb_all">
-                <h2>전체메뉴</h2>
-                <ul class="gnb_al_ul">
-                    <?php
-
-                    $i = 0;
-                    foreach( $menu_datas as $row ){
-                    ?>
-                    <li class="gnb_al_li">
-                        <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_al_a"><?php echo $row['me_name'] ?></a>
-                        <?php
-                        $k = 0;
-                        foreach( (array) $row['sub'] as $row2 ){
-                            if($k == 0)
-                                echo '<ul>'.PHP_EOL;
-                        ?>
-                            <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo $row2['me_name'] ?></a></li>
-                        <?php
-                        $k++;
-                        }   //end foreach $row2
-
-                        if($k > 0)
-                            echo '</ul>'.PHP_EOL;
-                        ?>
-                    </li>
-                    <?php
-                    $i++;
-                    }   //end foreach $row
-
-                    if ($i == 0) {  ?>
-                        <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) { ?> <br><a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php } ?></li>
-                    <?php } ?>
-                </ul>
-                <button type="button" class="gnb_close_btn"><i class="fa fa-times" aria-hidden="true"></i></button>
-            </div>
-        </div>
-    </nav>
-    <script>
-
-    $(function(){
-        $(".gnb_menu_btn").click(function(){
-            $("#gnb_all").show();
-        });
-        $(".gnb_close_btn").click(function(){
-            $("#gnb_all").hide();
-        });
-    });
-
-    </script>
-</div>
+									<li class="sub-1dli<?php echo ($me1['on']) ? ' on' : ''; ?>">
+										<a href="<?php echo $me1['href'];?>" class="me-sh sub-1da<?php echo (isset($me1['s'])) ? ' sub-icon' : '';?>" target="<?php echo $me1['target'];?>">
+											<i class="<?php echo $me1['icon'] ?>" aria-hidden="true"></i>
+											<?php echo $me1['text'];?>
+										</a>
+									</li>
+								<?php } //for ?>
+								</ul>
+							</div>
+						<?php } ?>
+					</td>
+				<?php $az++; } //for ?>
+				</tr>
+				</table>
+				<div class="btn-me-all">
+					<a href="javascript:;" class="btn btn-lightgray" data-toggle="collapse" data-target="#menu_all" title="닫기">
+						<i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i>
+						<span class="sound_only">전체메뉴 닫기</span>	
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav><!-- #nt_menu_all -->
+</div><!-- #nt_menu_wrap -->
 
 <?php if($tset['sticky']) { //메뉴상단고정시 ?>
 <script>

@@ -73,10 +73,12 @@ $is_col_all = 6;
 	<nav id="nt_menu">
 		<div class="nt-container">
 			<div class="me-wrap">
-				<div class="me-cell me-head me-li<?php echo ($is_index) ? ' on' : ''; ?>">
-					<a href="javascript:;" data-toggle="collapse" data-target="#menu_all" class="me-a" title="전체메뉴">
-						<i class="fa fa-bars" aria-hidden="true"></i>
-					</a>
+				<div class="me-cell me-head">
+					<div class="me-li<?php echo ($is_index) ? ' on' : ''; ?>">
+						<a href="javascript:;" data-toggle="collapse" data-target="#menu_all" class="me-a" title="전체메뉴">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
 				<div class="me-cell me-list">
 					<ul class="me-ul nav-slide">
@@ -90,10 +92,17 @@ $is_col_all = 6;
 							</a>
 							<?php if(isset($me['s'])) { //Is Sub Menu ?>
 								<div class="sub-slide sub-1div">
-									<ul class="sub-1dul">
-									<?php for($j=0; $j < count($me['s']); $j++) { 
+									<ul class="sub-1dul me-sw pull-left">
+									<?php 
+									$me_sw1 = 0; //나눔 체크
+									for($j=0; $j < count($me['s']); $j++) { 
 											$me1 = $me['s'][$j]; 
 									?>
+										<?php if($me1['sp']) { //나눔 ?>
+											</ul>
+											<ul class="sub-dul me-sw pull-left">
+										<?php $me_sw1++; } // 나눔 카운트 ?>
+
 										<?php if($me1['line']) { //구분라인 ?>
 											<li class="sub-1line"><a class="me-sh sub-1da"><?php echo $me1['line'];?></a></li>
 										<?php } ?>
@@ -135,6 +144,8 @@ $is_col_all = 6;
 										</li>
 									<?php } //for ?>
 									</ul>
+									<?php $me_sw1 = ($me_sw1) ? ($is_sub_w * ($me_sw1 + 1)) : 0; //서브메뉴 너비 ?>
+									<div class="clearfix"<?php echo ($me_sw1) ? ' style="width:'.$me_sw1.'px;"' : '';?>></div>
 								</div>
 							<?php } ?>
 						</li>
@@ -146,10 +157,12 @@ $is_col_all = 6;
 					<?php } ?>
 					</ul>							
 				</div>
-				<div class="me-cell me-tail me-li">
-					<a href="javascript:;" onclick="sidebar_open('sidebar-menu'); return false;" class="me-a" title="마이메뉴">
-						<i class="fa fa-toggle-on" aria-hidden="true"></i>
-					</a>
+				<div class="me-cell me-tail">
+					<div class="me-li<?php echo ($is_index) ? ' on' : ''; ?>">
+						<a href="javascript:;" onclick="sidebar_open('sidebar-menu'); return false;" class="me-a" title="마이메뉴">
+							<i class="fa fa-toggle-on" aria-hidden="true"></i>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -5,7 +5,7 @@
 @import url('./color.css');
 
 /* 폰트 정리 : 부트스트랩 html 기본 폰트 : 10px 기준 --------------------- */
-body {
+body { 
 	font-family:sans-serif;
 	font-size:1.5rem;
 	line-height:1.7;
@@ -17,7 +17,7 @@ body.is-pc {
 	line-height:1.8;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 { 
 	font-family:"Roboto", sans-serif;
 }
 
@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
 .is-pc .btn {
 	font-family:"Roboto", sans-serif;
 }
-.is-pc .btn-sm,
+.is-pc .btn-sm, 
 .is-pc .btn-xs {
 	font-family:"dotum", sans-serif;
 }
@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* 벡터 폰트 적용 */
-.is-pc .ko,
+.is-pc .ko, 
 .is-pc pre {
 	font-family:"dotum", sans-serif;
 }
@@ -77,28 +77,28 @@ body {
 	color:#333;
 	background-color:#fff;
 }
-body.bg-top {
+body.bg-top { 
 	background-repeat: no-repeat;
 	background-size:cover;
-	background-position: center top;
+	background-position: center top; 
 	background-attachment: fixed;
 }
-body.bg-center {
+body.bg-center { 
 	background-repeat: no-repeat;
 	background-size:cover;
-	background-position: center center;
+	background-position: center center; 
 	background-attachment: fixed;
 }
-body.bg-bottom {
+body.bg-bottom { 
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position: center bottom;
 	background-attachment: fixed;
 }
-body.bg-pattern {
+body.bg-pattern { 
 	background-repeat: repeat;
 	background-size:auto;
-	background-attachment:scroll;
+	background-attachment:scroll; 
 }
 
 html, h1, h2, h3, h4, h5, h6, form, fieldset, img {
@@ -124,7 +124,7 @@ legend {
 }
 
 label, input, button, select, img {
-	vertical-align:middle;
+	vertical-align:middle; 
 }
 
 input[type="submit"] {
@@ -149,14 +149,14 @@ p {
 	word-break:break-all;
 }
 
-a {
-	color: #000;
-	text-decoration: none;
+a { 
+	color: #000; 
+	text-decoration: none; 
 }
 
-a:hover, a:focus, a:active {
-	color: crimson;
-	text-decoration: none;
+a:hover, a:focus, a:active { 
+	color: crimson; 
+	text-decoration: none; 
 }
 
 .placeholdersjs {
@@ -263,8 +263,8 @@ a.btn_admin,.btn_admin {display:inline-block;color:#d13f4a;text-decoration:none;
 .new_win {position:relative}
 .new_win .tbl_wrap {margin:0 20px}
 .new_win #win_title {font-size:1.3em;height:50px;line-height:30px;padding:10px 20px;background:#fff;color:#000;-webkit-box-shadow:0 1px 10px rgba(0,0,0,.1);
-	-moz-box-shadow:0 1px 10px rgba(0,0,0,.1);
-	box-shadow:0 1px 10px rgba(0,0,0,.1)}
+-moz-box-shadow:0 1px 10px rgba(0,0,0,.1);
+box-shadow:0 1px 10px rgba(0,0,0,.1)}
 .new_win #win_title .sv {font-size:0.75em;line-height:1.2em}
 .new_win .win_ul {margin-bottom:15px;padding:0 20px}
 .new_win .win_ul:after {display:block;visibility:hidden;clear:both;content:""}
@@ -298,9 +298,9 @@ a.btn_admin,.btn_admin {display:inline-block;color:#d13f4a;text-decoration:none;
 .profile_img img {border-radius:50%}
 .sv_wrap {position:relative;font-weight:normal}
 .sv_wrap .sv {z-index:1000;display:none;margin:5px 0 0;font-size:12px;background:rgb(50, 60, 70);padding:6px 0;
-	-webkit-box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2);
-	-moz-box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2);
-	box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2)}
+-webkit-box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2);
+-moz-box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2);
+box-shadow:2px 2px 3px 0px rgba(0,0,0,0.2)}
 .sv_wrap .sv:before {content:"";position:absolute;top:-6px;left:15px;width:0;height:0;border-style:solid;border-width:0 6px 6px 6px;border-color:transparent transparent #333 transparent}
 .sv_wrap .sv a {display:block;margin:0;padding:0 10px;line-height:28px;width:100px;font-weight:normal;color:#fff}
 .sv_wrap .sv a:hover {background:rgba(0,0,0,0.5);color:#fff}
@@ -310,9 +310,9 @@ a.btn_admin,.btn_admin {display:inline-block;color:#d13f4a;text-decoration:none;
 
 /* cheditor 이슈 */
 .cheditor-popup-window *, .cheditor-popup-window :after, .cheditor-popup-window :before {
-	-webkit-box-sizing:content-box;
-	-moz-box-sizing:content-box;
-	box-sizing:content-box;
+-webkit-box-sizing:content-box;
+-moz-box-sizing:content-box;
+box-sizing:content-box;
 }
 
 /* 메일인증 메일주소 변경 페이지 */
@@ -327,9 +327,9 @@ a.btn_admin,.btn_admin {display:inline-block;color:#d13f4a;text-decoration:none;
 .tbl_frm01 th {width:70px;padding:7px 13px;border:1px solid #e9e9e9;border-left:0;background:#f5f8f9;text-align:left}
 .tbl_frm01 td {padding:7px 10px;border-top:1px solid #e9e9e9;border-bottom:1px solid #e9e9e9;background:transparent}
 .wr_content textarea,.tbl_frm01 textarea,.form_01 textarea, .frm_input {border:1px solid #d0d3db;background:#fff;color:#000;vertical-align:middle;border-radius:3px;padding:5px;
-	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
-	-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
-	box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
+box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 .tbl_frm01 textarea {padding:2px 2px 3px}
 .frm_input {height:40px}
@@ -345,126 +345,126 @@ a.btn_admin,.btn_admin {display:inline-block;color:#d13f4a;text-decoration:none;
 /********************************************************
 ■ Theme Layout : 테마 레이아웃
 ********************************************************/
-.wrapper {
-	margin:0 auto;
-	background:#fff;
+.wrapper { 
+	margin:0 auto; 
+	background:#fff;  
 }
-.nt-container {
-	margin:0 auto;
-	padding:0;
+.nt-container { 
+	margin:0 auto; 
+	padding:0; 
 }
-#nt_body {
-	overflow:hidden;
+#nt_body { 
+	overflow:hidden; 
 	background: #f7f7f7;
 }
-#nt_body .nt-container {
-	padding:0 15px;
+#nt_body .nt-container { 
+	padding:0 15px; 
 	background: #f7f7f7;
 }
 @media (max-width:991px) {
-	#nt_body .nt-container {
-		padding:0 15px;
-		border-left:none;
-		border-right:none;
-		background: #fff;
-	}
+	#nt_body .nt-container { 
+	padding:0 15px; 
+	border-left:none;
+	border-right:none;
+	background: #fff;
 }
-.boxed.wrapper #nt_body .nt-container {
-	padding:0 20px;
 }
-.nt-content {
-	position:relative;
+.boxed.wrapper #nt_body .nt-container { 
+	padding:0 20px; 
+}
+.nt-content { 
+	position:relative; 
 	padding:20px 0;
 }
-.nt-row {
-	margin-left:-15px;
-	margin-right:-15px;
+.nt-row { 
+	margin-left:-15px; 
+	margin-right:-15px; 
 }
-.nt-col {
-	position:relative;
+.nt-col { 
+	position:relative; 
 	padding:20px 15px;
 }
 @media all and (max-width:991px) {
-	.responsive #nt_body .nt-container {
-		padding:0 10px !important;
+	.responsive #nt_body .nt-container { 
+		padding:0 10px !important; 
 	}
-	.responsive #nt_body .nt-row {
-		margin-left:0;
-		margin-right:0;
+	.responsive #nt_body .nt-row { 
+		margin-left:0; 
+		margin-right:0; 
 	}
-	.responsive #nt_body .nt-col {
-		padding-left:0;
-		padding-right:0;
+	.responsive #nt_body .nt-col { 
+		padding-left:0; 
+		padding-right:0; 
 	}
 }
 
 /********************************************************
 ■ Loader : 인덱스 페이지 로딩바
 ********************************************************/
-#nt_loader {
-	background: #fff;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	display: block;
-	position: fixed;
-	z-index: 100000;
+#nt_loader { 
+	background: #fff; 
+	left: 0; 
+	top: 0; 
+	width: 100%; 
+	height: 100%; 
+	display: block; 
+	position: fixed; 
+	z-index: 100000; 
 }
-#nt_loader .loader {
-	color:#ddd;
-	margin: -25px 0 0 -25px;
-	left: 50%;
-	top: 50%;
-	width: 50px;
-	height: 50px;
-	line-height:50px;
-	font-size: 45px;
-	position: absolute;
-	z-index: 10001;
+#nt_loader .loader { 
+	color:#ddd; 
+	margin: -25px 0 0 -25px; 
+	left: 50%; 
+	top: 50%; 
+	width: 50px; 
+	height: 50px; 
+	line-height:50px; 
+	font-size: 45px; 
+	position: absolute; 
+	z-index: 10001; 
 }
 
 /********************************************************
 ■ Widget Title 위젯 타이틀
 ********************************************************/
-h3.h3 {
+h3.h3 { 
 	font-size:15px;
-	line-height:1.8;
-	padding:0;
-	margin:0;
+	line-height:1.8; 
+	padding:0; 
+	margin:0; 
 	font-weight:bold;
 }
-h3.h3 .more {
+h3.h3 .more { 
 	font-size:16px
 	font-weight:normal;
 	font-family:"Roboto", sans-serif;
 	color:#ddd;
 }
-hr.hr::before {
-	width:100%;
-	height:1px;
-	content: "";
-	position:absolute;
-	left:0;
-	bottom:1px;
-	line-height:1px;
-	background-color:#ddd;
+hr.hr::before { 
+	width:100%; 
+	height:1px; 
+	content: ""; 
+	position:absolute; 
+	left:0; 
+	bottom:1px; 
+	line-height:1px; 
+	background-color:#ddd; 
 }
-hr.hr {
+hr.hr { 
 	display:block;
-	position:relative;
-	height:3px;
-	margin:5px 0 10px;
-	border: none;
-	line-height:1px;
+	position:relative; 
+	height:3px; 
+	margin:5px 0 10px; 
+	border: none; 
+	line-height:1px; 
 }
-hr.hr::after {
-	width:45px;
-	height:3px;
-	content: "";
-	position:absolute;
-	left:0;
-	bottom:0;
+hr.hr::after { 
+	width:45px; 
+	height:3px; 
+	content: ""; 
+	position:absolute; 
+	left:0; 
+	bottom:0; 
 	line-height:1px;
 }
 
@@ -473,28 +473,28 @@ hr.hr::after {
 ********************************************************/
 
 /* Button */
-.btn-lg {
-	padding: 10px 16px;
-	border-radius: 3px;
-	line-height: 1.33;
-	font-size: 18px;
+.btn-lg { 
+	padding: 10px 16px; 
+	border-radius: 3px; 
+	line-height: 1.33; 
+	font-size: 18px; 
 }
-.btn-lg i {
-	top: 3px;
-	font-size: 24px;
-	position: relative;
+.btn-lg i {	
+	top: 3px; 
+	font-size: 24px; 
+	position: relative; 
 }
-.btn-group.btn-group-justified a {
-	border-left-width:0px;
+.btn-group.btn-group-justified a { 
+	border-left-width:0px; 
 }
-.btn-group.btn-group-justified a:first-child {
-	border-left-width:1px;
+.btn-group.btn-group-justified a:first-child { 
+	border-left-width:1px; 
 }
 
 /* List Group */
-.list-group-item {
-	word-break:break-all;
-	border-radius:0 !important;
+.list-group-item { 
+	word-break:break-all; 
+	border-radius:0 !important; 
 }
 
 /* 사각 스타일 */
@@ -509,8 +509,8 @@ hr.hr::after {
 .is-square .list-group-item,
 .is-square .panel,
 .is-square .panel-group .panel,
-.is-square .panel .panel-heading {
-	border-radius:0 !important;
+.is-square .panel .panel-heading { 
+	border-radius:0 !important; 
 }
 
 /********************************************************

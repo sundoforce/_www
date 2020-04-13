@@ -88,13 +88,21 @@
 	position: relative; 
 	content: "\f105"; 
 }
+#nt_menu .me-list .me-li { 
+	display:inline-block;
+}
 #nt_menu .me-a { 
 	display:block; 
 	position:relative;
 }
 #nt_menu .me-head,
-#nt_menu .me-tail { 
+#nt_menu .me-tail {
 	width:50px; 
+}
+#nt_menu .me-head .me-li,
+#nt_menu .me-tail .me-li {
+	width:50px; 
+	float:left;
 	text-align:center;
 }
 #nt_menu .me-head a > i,
@@ -118,7 +126,6 @@
 	position:relative; 
 	display:block;
 }
-
 #nt_menu .sub-2div { 
 	left:100%; 
 	top:0; 
@@ -133,21 +140,8 @@
 #nt_menu .sub-2line { 
 	display:block; 
 }
-#nt_menu .me-ul { 
-	display:table; 
-	width:100%; 
-	table-layout:fixed; 
-	margin:0px; 
-}
-#nt_menu .me-li { 
-	display:table-cell; 
-	text-align:center; 
-}
-#nt_menu .sub-1div { 
-	position:absolute; 
-	width:100%; 
-	left:0; 
-	text-align:left; 
+#nt_menu .sub-1div {
+	position:absolute;
 }
 #nt_menu .sub-1div::before { 
 	left: 50%; 
@@ -163,12 +157,15 @@
 	line-height:44px;
 	font-weight:bold;
 }
+#nt_menu .me-list .me-li { 
+	float:left;
+}
 #nt_menu .me-li.on .me-a,
 #nt_menu .me-li:hover .me-a { 
 	color:#fff; 
-	background:#000; 
+	background: #000; 
 }
-#nt_menu .sub-1div { 
+#nt_menu .sub-1div {
 	top:44px;
 	background:#fff; 
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .175); 
@@ -212,6 +209,10 @@
 	background:#f5f5f5; 
 }
 
+/* 주메뉴 메뉴간격 : 페딩값으로 조절 */
+#nt_menu .me-list .me-a { 
+	padding:0 20px;
+}
 /* 서브메뉴 높이설정 : 페딩값으로 조절 */
 #nt_menu .me-sh { 
 	padding:8px 15px; 

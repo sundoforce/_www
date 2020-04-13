@@ -668,13 +668,13 @@ function na_check_ext($type='') {
 	if($type == 'video') {
 		$ext = array('mp4', 'm4v', 'f4v', 'mov', 'flv', 'webm');
 	} else if($type == 'audio') {
-		$ext = array('acc', 'm4a', 'f4a', 'mp3', 'ogg', 'oga');
+		$ext = array('acc', 'm4a', 'f4a', 'mp3', 'ogg', 'oga', 'midi', 'mid');
 	} else if($type == 'caption') {
 		$ext = array('vtt', 'srt', 'ttml', 'dfxp');
 	} else if($type == 'image') {
 		$ext = array('jpg', 'jpeg', 'gif', 'png');
 	} else {
-		$ext = array("mp4", "m4v", "f4v", "mov", "flv", "webm", "acc", "m4a", "f4a", "mp3", "ogg", "oga");
+		$ext = array("mp4", "m4v", "f4v", "mov", "flv", "webm", "acc", "m4a", "f4a", "mp3", "ogg", "oga", "mid", "midi");
 	}
 
 	return $ext;

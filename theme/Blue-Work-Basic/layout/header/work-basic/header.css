@@ -32,7 +32,7 @@
 }
 #header_pc .header-search input { 
 	font-size:16px !important;
-	background: #fff; 
+	background: #fff;
 	border:0 !important; 
 	box-shadow:none !important; 
 	-webkit-box-shadow:none !important; 
@@ -42,7 +42,7 @@
 	-webkit-box-shadow: none !important; 
 }
 #header_pc .header-search .btn { 
-	color: #fff !important; 
+	color: #fff !important;
 	border:0; 
 	background: #6d94ce !important; 
 	border-radius: 0px;

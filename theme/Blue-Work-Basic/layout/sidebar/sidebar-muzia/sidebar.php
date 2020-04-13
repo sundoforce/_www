@@ -107,10 +107,18 @@ add_javascript('<script src="'.$nt_sidebar_url.'/sidebar.js"></script>', 0);
 		<div class="sidebar-icon f-small">
 			<div class="sidebar-icon-tbl">
 				<div class="sidebar-icon-cell">
-                    <a href="<?php echo G5_BBS_URL;?>/login.php">
-                        <i class="fa fa-lightbulb-o circle light-circle normal" aria-hidden="true"></i>
-                        <span>로그인</span>
-                    </a>
+				    <?php if(!$is_member) { // 로그인 상태 ?>
+                        <a href="<?php echo G5_BBS_URL;?>/login.php">
+                            <i class="fa fa-lightbulb-o circle light-circle normal" aria-hidden="true"></i>
+                            <span>로그인</span>
+                        </a>
+                     <?php } else { ?>
+                       <a href="<?php echo G5_BBS_URL ?>/noti.php">
+                            <i class="fa fa-lightbulb-o circle light-circle normal" aria-hidden="true"></i>
+                               <?php if ($member['as_noti']) { ?> <b class="orangered"><?php echo number_format($member['as_noti']) ?></b><?php } ?>
+                              <span>알림</span>
+                        </a>
+                     <?php } ?>
                 </div>
 				<div class="sidebar-icon-cell">
 					<a href="<?php echo G5_ATTENDANCE_URL;?>/attendance.php">
